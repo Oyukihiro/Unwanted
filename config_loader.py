@@ -83,7 +83,7 @@ DEFAULT_CONFIG = {
     ################################################
     ### Sistema de música - RPC (Rich Presence): ###
     ################################################
-    "RUN_RPC_SERVER": True,
+    "RUN_RPC_SERVER": false,
     "RPC_SERVER": "ws://localhost:$PORT/ws",
     "PORT": None,
     "RPC_PUBLIC_URL": "",
@@ -226,7 +226,7 @@ def load_config():
         try:
             CONFIG[i] = int(CONFIG[i])
         except ValueError as e:
-            raise Exception(f"Você usou uma configuração inválida! {i}: {CONFIG[i]}\n{repr(e)}")
+            raise Exception(f"You have used an invalid configuration! {i}: {CONFIG[i]}\n{repr(e)}")
 
     # converter strings que requer valor bool/nulo.
     for i in [
@@ -282,7 +282,7 @@ def load_config():
         try:
             CONFIG[i] = bools[CONFIG[i]]
         except KeyError as e:
-            raise Exception(f"Você usou uma configuração inválida! {i}: {CONFIG[i]}\n{repr(e)}")
+            raise Exception(f"You have used an invalid configuration! {i}: {CONFIG[i]}\n{repr(e)}")
 
     CONFIG["RPC_SERVER"] = CONFIG["RPC_SERVER"].replace("$PORT", CONFIG.get("PORT") or environ.get("PORT", "80"))
 
