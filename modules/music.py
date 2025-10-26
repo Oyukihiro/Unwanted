@@ -5161,9 +5161,9 @@ class Music(commands.Cog):
 
                     if not channel_db_perms.embed_links:
                         raise GenericError(
-                            f"**{bot.user.mention} não possui permissão para anexar links/embeds no canal <#{static_player['channel']}>**\n"
-                            "Caso queira resetar a configuração do canal de pedir música, use o comando /reset ou /setup "
-                            "novamente..."
+                            f"**{bot.user.mention} You do not have permission to attach links/embeds to the channel. <#{static_player['channel']}>**\n"
+                            "If you want to reset the music request channel settings, use the command /reset ou /setup "
+                            "Again..."
                         )
 
         return channel_db, warn_message, message
