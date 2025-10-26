@@ -3042,7 +3042,7 @@ class Music(commands.Cog):
     @has_player()
     @check_voice()
     @commands.slash_command(extras={"only_voiced": True}, cooldown=song_request_thread_cd,
-                            description=f"{desc_prefix}Criar uma thread/conversa temporária para song-request (pedido de música)")
+                            description=f"{desc_prefix}Create a temporary thread/conversation for song-request (pedido de música)")
     @commands.contexts(guild=True)
     async def song_request_thread(self, inter: disnake.ApplicationCommandInteraction):
 
@@ -4922,8 +4922,8 @@ class Music(commands.Cog):
         txt = view.build_txt()
 
         if not txt:
-            raise GenericError("**Não há suporte a esse recurso no momento...**\n\n"
-                             "`Suporte ao spotify e YTDL não estão ativados.`")
+            raise GenericError("**This feature is not currently supported....**\n\n"
+                             "`Spotify support and YTDL are not enabled..`")
 
         view.message = await inter.send(txt, view=view, ephemeral=ephemeral)
 
@@ -4979,7 +4979,7 @@ class Music(commands.Cog):
 
                 if not vc:
                     print(
-                        f"{self.bot.user} - {player.guild.name} [{guild_id}] - Player finalizado por falta de canal de voz")
+                        f"{self.bot.user} - {player.guild.name} [{guild_id}] - Player terminated due to lack of voice channel")
                     try:
                         await player.destroy()
                     except:
@@ -4990,7 +4990,7 @@ class Music(commands.Cog):
 
                 if not player.is_paused and not player.is_playing:
                     await player.process_next()
-                print(f"{self.bot.user} - {player.guild.name} [{guild_id}] - Player Reconectado no canal de voz")
+                print(f"{self.bot.user} - {player.guild.name} [{guild_id}] - Player reconnected to voice channel")
             except:
                 traceback.print_exc()
 
