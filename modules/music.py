@@ -146,7 +146,7 @@ class Music(commands.Cog):
             author = inter.author
 
         if not author.guild_permissions.manage_guild and not (await bot.is_owner(author)):
-            raise GenericError("**Você não possui permissão de gerenciar servidor para ativar/desativar esse sistema.**")
+            raise GenericError("**You don't any permission to acess this command/desativar e.**")
 
         if not template:
             await inter.response.defer(ephemeral=True, with_message=True)
@@ -5060,7 +5060,7 @@ class Music(commands.Cog):
             channel_db = None
         except disnake.Forbidden:
             channel_db = bot.get_channel(inter.channel_id)
-            warn_message = f"Não tenho permissão de acessar o canal <#{static_player['channel']}>, o player será usado no modo tradicional."
+            warn_message = f"I don't have acess to this channel<#{static_player['channel']}>, the player will be used in traditional mode."
             static_player["channel"] = None
 
         if not channel_db or channel_db.guild.id != inter.guild_id:
@@ -5114,7 +5114,7 @@ class Music(commands.Cog):
                                     if not thread:
                                         thread_wmessage = await channel_db.parent.create_thread(
                                             name=f"{bot.user} song-request",
-                                            content="Post para pedido de músicas.",
+                                            content="Post for music.",
                                             auto_archive_duration=10080,
                                             slowmode_delay=5,
                                         )
@@ -5135,8 +5135,8 @@ class Music(commands.Cog):
                                 await channel_db.edit(**thread_kw)
 
                             elif isinstance(channel.parent, disnake.ForumChannel):
-                                warn_message = f"**{bot.user.mention} não possui permissão de gerenciar tópicos " \
-                                                f"para desarquivar/destrancar o tópico: {channel_db.mention}**"
+                                warn_message = f"**{bot.user.mention} does not have permission to manage topics " \
+                                                f"to unarchive/unlock the topic: {channel_db.mention}**"
 
                 except AttributeError:
                     pass
@@ -5154,9 +5154,9 @@ class Music(commands.Cog):
 
                     if not send_message_perm:
                         raise GenericError(
-                            f"**{bot.user.mention} não possui permissão para enviar mensagens no canal <#{static_player['channel']}>**\n"
-                            "Caso queira resetar a configuração do canal de pedir música, use o comando /reset ou /setup "
-                            "novamente..."
+                            f"**{bot.user.mention} does not have permission to send messages in the channel <#{static_player['channel']}>**\n"
+                            "If you want to reset the music request channel settings, use the command /reset ou /setup "
+                            "Again..."
                         )
 
                     if not channel_db_perms.embed_links:
@@ -6070,7 +6070,7 @@ class Music(commands.Cog):
                 if selected_fav:
                     multichoice_opts.append(
                         disnake.SelectOption(
-                            label="Favorito:",
+                            label="Favorite:",
                             emoji="⭐",
                             description=fix_characters(selected_fav[6:], 45),
                             value="music_fav"
