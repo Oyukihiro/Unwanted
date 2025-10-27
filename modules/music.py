@@ -4922,8 +4922,8 @@ class Music(commands.Cog):
         txt = view.build_txt()
 
         if not txt:
-            raise GenericError("**Não há suporte a esse recurso no momento...**\n\n"
-                             "`Suporte ao spotify e YTDL não estão ativados.`")
+            raise GenericError("**Theres no support for this resource in the momment...**\n\n"
+                             "`Spotify and YTDL support are not enabled..`")
 
         view.message = await inter.send(txt, view=view, ephemeral=ephemeral)
 
