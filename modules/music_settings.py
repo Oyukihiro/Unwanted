@@ -1747,7 +1747,7 @@ class RPCCog(commands.Cog):
     @commands.cooldown(1,  120, commands.BucketType.guild)
     @commands.has_permissions(manage_channels=True)
     @commands.command(
-        description="Alterar a região de um canal de palco"
+        description="Change the region of a stage channel"
     )
     async def stageregion(self, ctx: CustomContext):
 
@@ -1814,14 +1814,14 @@ class RPCCog(commands.Cog):
 
     rpc_cd = commands.CooldownMapping.from_cooldown(1, 30, commands.BucketType.user)
 
-    @commands.command(description="Ativar/Desativar o sistema de rich-presence no seu status.",
+    @commands.command(description="Enable/Disable the rich-presence system in your status.",
                       name="richpresence", aliases=["rich_presence", "rpc"], cooldown=rpc_cd)
     async def rich_presence_legacy(self, ctx: CustomContext):
 
         await self.rich_presence.callback(self=self, inter=ctx)
 
     @commands.slash_command(
-        description=f"{desc_prefix}Ativar/Desativar o sistema de rich-presence no seu status.", cooldown=rpc_cd
+        description=f"{desc_prefix}Enable/Disable the rich-presence system in your status.", cooldown=rpc_cd
     )
     @commands.contexts(guild=True)
     async def rich_presence(self, inter: disnake.ApplicationCommandInteraction):
@@ -1837,15 +1837,15 @@ class RPCCog(commands.Cog):
 
         embed = disnake.Embed(
             color=self.bot.get_color(),
-            description="**Mini-guia para usar o app para exibir a música que você está ouvindo via RPC:\n\n"
-                        "Faça o download do app (musicbot_rpc.zip) "
-                        "[aqui]().\n\n"
-                        "Extraia o musicbot_rpc.zip e na pasta abra o musicbot_rpc." \
-                        "Adicione o link do websocket abaixo no app (aba: Socket Settings):** ```ansi\n" \
+            description="**Mini-guide to use the app to display the music you're listening to via RPC:\n\n"
+                        "Download the app (musicbot_rpc.zip) "
+                        "[here]().\n\n"
+                        "Extract musicbot_rpc.zip and in the folder open musicbot_rpc." \
+                        "Add the websocket link below in the app (tab: Socket Settings):** ```ansi\n" \
                         f"{(self.bot.config['RPC_PUBLIC_URL'] or self.bot.config['RPC_SERVER']).replace('$PORT', os.environ.get('PORT', '80'))}```"
         )
 
-        embed.set_footer(text="Nota: No momento funciona apenas no windows com discord desktop, não funciona no mobile "
+        embed.set_footer(text="Note: Currently only works on Windows with Discord desktop, does not work on mobile "
                               "ou discord web.")
 
         if self.bot.config["ENABLE_RPC_AUTH"]:

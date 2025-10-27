@@ -64,10 +64,8 @@ def validate_java(cmd: str, debug: bool = False):
             return cmd
     except Exception as e:
         if debug:
-            print(f"\nFalha ao obter versão do java...\n"
-                  f"Path: {cmd} | Erro: {repr(e)}\n")
-
-def run_lavalink(
+                print(f"\nFailed to get Java version...\n"
+                  f"Path: {cmd} | Error: {repr(e)}\n")def run_lavalink(
         lavalink_file_url: str = None,
         lavalink_initial_ram: int = 30,
         lavalink_ram_limit: int = 100,

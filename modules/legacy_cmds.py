@@ -617,7 +617,7 @@ class Owner(commands.Cog):
         guild_data = await self.bot.get_global_data(ctx.guild.id, db_name=DBModel.guilds)
 
         if not guild_data["prefix"]:
-            raise GenericError("**Nao há prefixo configurado no servidor.**")
+            raise GenericError("**No prefix configured on the server.**")
 
         guild_data["prefix"] = ""
         self.bot.pool.guild_prefix_cache[ctx.guild.id] = ""
@@ -625,8 +625,8 @@ class Owner(commands.Cog):
         await self.bot.update_global_data(ctx.guild.id, guild_data, db_name=DBModel.guilds)
 
         embed = disnake.Embed(
-            description=f"**O prefixo do servidor foi resetado com sucesso.\n"
-                        f"O prefixo padrão agora é:** `{disnake.utils.escape_markdown(self.bot.default_prefix)}`",
+            description=f"**The server prefix has been reset successfully.\n"
+                        f"The default prefix is now:** `{disnake.utils.escape_markdown(self.bot.default_prefix)}`",
             color=self.bot.get_color(ctx.guild.me)
         )
 
@@ -804,8 +804,8 @@ class Owner(commands.Cog):
 
         try:
             embed = disnake.Embed(
-                description="**Não envie o arquivo source.zip ou o arquivo .env pra ninguém e muito cuidado ao postar "
-                            "print's do conteudo do arquivo .env e não adicione esse arquivo em locais públicos como "
+                description="**Do not send the source.zip file or the .env file to anyone and be very careful when posting "
+                            "prints of the .env file content and do not add this file in public places like "
                             "github, repl.it, glitch.com, etc.**",
                 color=self.bot.get_color(ctx.guild.me))
             embed.set_footer(text="Por medida de segurança, esta mensagem será deletada em 2 minutos.")
