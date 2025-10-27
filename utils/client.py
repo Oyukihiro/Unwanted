@@ -754,8 +754,8 @@ class BotPool:
                 async def check_commands(ctx: CustomContext):
 
                     if not (await bot.is_owner(ctx.author)):
-                        raise GenericError("**Os comandos de texto estão desativados!\n"
-                                           "Use os comandos de barra /**", self_delete=True, delete_original=15)
+                        raise GenericError("**Text commands are disabled!\n"
+                                           "Use the slash commands /**", self_delete=True, delete_original=15)
 
                     return True
 
@@ -796,7 +796,7 @@ class BotPool:
                     allow_private = False
 
                 if inter.bot.exclusive_guild_id and inter.guild_id != inter.bot.exclusive_guild_id:
-                    raise GenericError("Esse servidor não está autorizado para usar meus comandos...")
+                    raise GenericError("This server is not authorized to use my commands...")
 
                 if self.config["COMMAND_LOG"] and inter.guild and not (await inter.bot.is_owner(inter.author)):
                     try:
@@ -1425,7 +1425,7 @@ class BotCore(commands.AutoShardedBot):
                         self.unload_extension(module_filename)
                         self.load_extension(module_filename)
                         if not self.bot_ready and load_modules_log:
-                            print(f"🟦 - {bot_name} - {filename}.py Recarregado.")
+                            print(f"🟦 - {bot_name} - {filename}.py Reloaded.")
                         load_status["reloaded"].append(f"{filename}.py")
                     except (commands.ExtensionAlreadyLoaded, commands.ExtensionNotLoaded):
                         try:
