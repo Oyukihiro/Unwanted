@@ -5278,7 +5278,7 @@ class Music(commands.Cog):
         if player.stage_title_event and (time_:=int((disnake.utils.utcnow() - player.start_time).total_seconds())) < time_limit and not (await bot.is_owner(inter.author)):
             raise GenericError(
                 f"**You will have to wait. {time_format((time_limit - time_) * 1000, use_names=True)} to use this function "
-                f"com o anúncio automático do palco ativo...**"
+                f"with automatic announcement of the active stage...**"
             )
 
     async def player_controller(self, interaction: disnake.MessageInteraction, control: str, **kwargs):
