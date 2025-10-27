@@ -385,7 +385,7 @@ class Owner(commands.Cog):
 
         text = "`Será necessário me reiniciar após as alterações.`"
 
-        txt = f"`✅` **[Atualização realizada com sucesso!]({self.bot.pool.remote_git_url}/commits/main)**"
+        txt = f"`✅` **[Update successfully completed!]({self.bot.pool.remote_git_url}/commits/main)**"
 
         if git_log:
             txt += f"\n\n{self.format_log(git_log[:10])}"
@@ -422,7 +422,7 @@ class Owner(commands.Cog):
         if args.pip:
 
             embed = disnake.Embed(
-                description="**Instalando as dependências.\nPor favor aguarde...**",
+                description="**Installing dependencies. Please wait...**",
                 color=self.bot.get_color(ctx.guild.me)
             )
 
@@ -430,7 +430,7 @@ class Owner(commands.Cog):
 
             await run_command(cmd)
 
-            embed.description = "**As dependências foram instaladas com sucesso!**"
+            embed.description = "**The dependencies have been successfully installed!**"
 
             await msg.edit(embed=embed)
 
