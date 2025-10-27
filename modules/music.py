@@ -129,7 +129,7 @@ class Music(commands.Cog):
             self, inter: disnake.ApplicationCommandInteraction,
             template: str = commands.Param(
                 name="modelo", default="",
-                description="Manually specify a status template (include placeholders)."
+                description="Especifique manualmente um modelo de status (inclua placeholders)."
             )
     ):
 
