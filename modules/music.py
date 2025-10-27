@@ -112,7 +112,7 @@ class Music(commands.Cog):
     @pool_command(
         only_voiced=True, name="setvoicestatus", aliases=["stagevc", "togglestageannounce", "announce", "vcannounce", "setstatus",
                                                          "voicestatus", "setvcstatus", "statusvc", "vcstatus", "stageannounce"],
-        description="Ativar o sistema de anuncio/status automático do canal com o nome da música.",
+        description="Enable the channel's automatic announcement/status system with the song name.",
         cooldown=stage_cd, max_concurrency=stage_mc, extras={"exclusive_cooldown": True},
         usage="{prefix}{cmd} <placeholders>\nEx: {track.author} - {track.title}"
     )
@@ -129,7 +129,7 @@ class Music(commands.Cog):
             self, inter: disnake.ApplicationCommandInteraction,
             template: str = commands.Param(
                 name="modelo", default="",
-                description="Especifique manualmente um modelo de status (inclua placeholders)."
+                description="Manually specify a status template (include placeholders)."
             )
     ):
 
