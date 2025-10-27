@@ -42,7 +42,7 @@ def check_channel_perm(channel: Union[disnake.StageChannel, disnake.VoiceChannel
 
     if missing_perms:
         raise GenericError(
-            f"**{channel.guild.me.mention} não possui as seguintes permissões necessárias no canal {channel.mention}** ```ansi\n" +
+            f"**{channel.guild.me.mention} does not have the following necessary permissions on the channel {channel.mention}** ```ansi\n" +
             "\n".join(f"[0;33m{perms_translations.get(p, p)}[0m" for p in missing_perms) + "```")
 
 
@@ -90,7 +90,7 @@ class SkinSelector(disnake.ui.View):
         self.clear_items()
 
         if not self.global_mode:
-            self.embed.title = "Seletor de skin (Aplicar no bot selecionado)"
+            self.embed.title = "Skin selector (Apply to selected bot)"
 
             for s in self.select_opts:
                 s.default = self.skin_selected == s.value
@@ -102,7 +102,7 @@ class SkinSelector(disnake.ui.View):
             static_select_opts = self.static_select_opts
 
         else:
-            self.embed.title = "Seletor de skin (Aplicar em todos os bots do servidor)"
+            self.embed.title = "Skin selector (Apply to all bots on the server)"
 
             for s in self.global_select_opts:
                 s.default = self.skin_selected == s.value
@@ -121,15 +121,15 @@ class SkinSelector(disnake.ui.View):
         static_select_opts.callback = self.static_skin_callback
         self.add_item(static_select_opts)
 
-        global_mode = disnake.ui.Button(label=("Desativar" if self.global_mode else "Ativar") + " modo Global ", emoji="🌐")
+        global_mode = disnake.ui.Button(label=("Deactivate" if self.global_mode else "Ativar") + " modo Global ", emoji="🌐")
         global_mode.callback = self.mode_callback
         self.add_item(global_mode)
 
-        confirm_button = disnake.ui.Button(label="Salvar", emoji="💾")
+        confirm_button = disnake.ui.Button(label="Save", emoji="💾")
         confirm_button.callback = self.confirm_callback
         self.add_item(confirm_button)
 
-        cancel_button = disnake.ui.Button(label="Cancelar", emoji="❌")
+        cancel_button = disnake.ui.Button(label="Cancel", emoji="❌")
         cancel_button.callback = self.stop_callback
         self.add_item(cancel_button)
 
@@ -138,7 +138,7 @@ class SkinSelector(disnake.ui.View):
         if inter.author.id == self.ctx.author.id:
             return True
 
-        await inter.send(f"Apenas {self.ctx.author.mention} pode interagir aqui!", ephemeral=True)
+        await inter.send(f"only {self.ctx.author.mention} you can interact here!", ephemeral=True)
         return False
 
     async def skin_callback(self, inter: disnake.MessageInteraction):
@@ -184,13 +184,13 @@ class PlayerSettings(disnake.ui.View):
         self.clear_items()
 
         player_volume_select = disnake.ui.Select(
-            placeholder="Selecione um volume padrão.",
+            placeholder="Select a default volume.",
             options=[
-                        disnake.SelectOption(label=f"Volume padrão: {i}", default=i == self.default_player_volume,
+                        disnake.SelectOption(label=f"Standard volume: {i}", default=i == self.default_player_volume,
                                              value=str(i)) for i in range(5, 101, 5)
                     ] + [
-                disnake.SelectOption(label=f"Volume padrão: {i}", default=i == self.default_player_volume,
-                                     description="Nota: Acima de 100% o audio pode ficar ruim.",
+                disnake.SelectOption(label=f"Standard volume: {i}", default=i == self.default_player_volume,
+                                     description="Note: Above 100%, the audio may become distorted.",
                                      value=str(i)) for i in range(110, 151, 10)
             ]
         )
@@ -213,7 +213,7 @@ class PlayerSettings(disnake.ui.View):
         check_autoplay_button.callback = self.autoplay_callback
         self.add_item(check_autoplay_button)
 
-        close_button = disnake.ui.Button(label="Salvar/Fechar", emoji="💾")
+        close_button = disnake.ui.Button(label="Save/Close", emoji="💾")
         close_button.callback = self.close_callback
         self.add_item(close_button)
 
@@ -241,9 +241,9 @@ class PlayerSettings(disnake.ui.View):
 
         try:
             if isinstance(self.ctx, CustomContext):
-                await self.message.edit(content="Alterações salvas com sucesso!", view=None, embed=None)
+                await self.message.edit(content="Changes successfully saved!", view=None, embed=None)
             else:
-                await self.ctx.edit_original_message(content="Alterações salvas com sucesso!", view=None, embed=None)
+                await self.ctx.edit_original_message(content="Changes successfully saved!", view=None, embed=None)
         except Exception:
             traceback.print_exc()
         await self.save_data()
@@ -277,11 +277,11 @@ class PlayerSettings(disnake.ui.View):
 
         if isinstance(self.ctx, CustomContext):
             await self.message.edit(
-                embed=disnake.Embed(description="**Tempo esgotado...**", color=self.bot.get_color()), view=None
+                embed=disnake.Embed(description="**Time's up...**", color=self.bot.get_color()), view=None
             )
         else:
             await self.ctx.edit_original_message(
-                embed=disnake.Embed(description="**Tempo esgotado...**", color=self.bot.get_color()), view=None
+                embed=disnake.Embed(description="**Time's up...**", color=self.bot.get_color()), view=None
             )
 
         await self.save_data()
@@ -371,7 +371,7 @@ class MusicSettings(commands.Cog):
                                   purge_messages=args.reset)
 
     @commands.slash_command(
-        description=f"{desc_prefix}Criar/escolher um canal dedicado para pedir músicas e deixar player fixado.",
+        description=f"{desc_prefix}Create/choose a dedicated channel for requesting songs and leave the player pinned.",
         default_member_permissions=disnake.Permissions(manage_guild=True), cooldown=setup_cd, max_concurrency=setup_mc
     )
     @commands.contexts(guild=True)
@@ -379,17 +379,17 @@ class MusicSettings(commands.Cog):
             self,
             interaction: disnake.ApplicationCommandInteraction,
             target: Union[disnake.TextChannel, disnake.VoiceChannel, disnake.ForumChannel, disnake.StageChannel] = commands.Param(
-                name="canal", default=None, description="Selecionar um canal existente"
+                name="channel", default=None, description="Select an existing channel"
             ),
             purge_messages: str = commands.Param(
-                name="limpar_mensagens", default="no",
-                description="Limpar mensagens do canal selecionado (até 100 mensagens, não efetivo em forum).",
+                name="clear_messages", default="no",
+                description="Clear messages from the selected channel (up to 100 messages, not effective in forums).",
                 choices=[
                     disnake.OptionChoice(
-                        disnake.Localized("Yes", data={disnake.Locale.pt_BR: "Sim"}), "yes"
+                        disnake.Localized("Yes", data={disnake.Locale.pt_BR: "Yes"}), "yes"
                     ),
                     disnake.OptionChoice(
-                        disnake.Localized("No", data={disnake.Locale.pt_BR: "Não"}), "no"
+                        disnake.Localized("No", data={disnake.Locale.pt_BR: "No"}), "no"
                     )
                 ],
             )
@@ -844,7 +844,7 @@ class MusicSettings(commands.Cog):
 
         channel = target
 
-        msg = f"{inter.author.mention}, o sistema pra pedidos de música foi configurado no canal <#{channel.id}> através do bot: {bot.user.mention}"
+        msg = f"{inter.author.mention}, The music request system has been set up on the channel. <#{channel.id}> através do bot: {bot.user.mention}"
 
         if player and player.text_channel != target:
             if player.static:
