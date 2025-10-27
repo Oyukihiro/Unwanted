@@ -270,7 +270,7 @@ class Music(commands.Cog):
             manual_bot_choice=manual_bot_choice
         )
 
-    @search.autocomplete("busca")
+    @search.autocomplete("search")
     async def search_autocomplete(self, inter: disnake.Interaction, current: str):
 
         if not current:
@@ -2060,7 +2060,7 @@ class Music(commands.Cog):
         await self.process_music(inter=inter, force_play=force_play, ephemeral=ephemeral, user_data=user_data, player=player,
                                  log_text=log_text, emoji=emoji, warn_message=warn_message, reg_query=reg_query)
 
-    @play.autocomplete("busca")
+    @play.autocomplete("search")
     async def fav_add_autocomplete(self, inter: disnake.Interaction, query: str):
 
         if not self.bot.is_ready() or URL_REG.match(query) or URL_REG.match(query):
