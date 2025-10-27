@@ -580,7 +580,7 @@ class Music(commands.Cog):
         else:
             if count < 1:
                 return tracks
-                if len(player.queue) >= count and not (await bot.is_owner(user)):
+            if len(player.queue) >= count and not (await bot.is_owner(user)):
                 raise GenericError(f"**The queue is full ({self.bot.config['QUEUE_MAX_ENTRIES']} songs).**")
 
         if tracks:
