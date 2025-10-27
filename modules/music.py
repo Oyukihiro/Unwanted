@@ -5425,7 +5425,7 @@ class Music(commands.Cog):
                         if control == PlayerControls.embed_forceplay and player.current and (player.current.uri.startswith(url) or url.startswith(player.current.uri)):
                             await self.check_stage_title(inter=interaction, bot=bot, player=player)
                             await player.seek(0)
-                            player.set_command_log("voltou para o início da música.", emoji="⏪")
+                            player.set_command_log("Returning to the begin at the music.", emoji="⏪")
                             await asyncio.sleep(3)
                             await player.update_stage_topic()
                             await asyncio.sleep(7)
