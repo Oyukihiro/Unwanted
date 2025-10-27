@@ -121,7 +121,7 @@ class SkinSelector(disnake.ui.View):
         static_select_opts.callback = self.static_skin_callback
         self.add_item(static_select_opts)
 
-        global_mode = disnake.ui.Button(label=("Deactivate" if self.global_mode else "Ativar") + " modo Global ", emoji="🌐")
+        global_mode = disnake.ui.Button(label=("Deactivate" if self.global_mode else "Active") + " Global mode ", emoji="🌐")
         global_mode.callback = self.mode_callback
         self.add_item(global_mode)
 
@@ -254,7 +254,7 @@ class PlayerSettings(disnake.ui.View):
         if inter.author.id == self.ctx.author.id:
             return True
 
-        await inter.send(f"Apenas {self.ctx.author.mention} pode interagir aqui!", ephemeral=True)
+        await inter.send(f"Only {self.ctx.author.mention} can interact here!", ephemeral=True)
         return False
 
     async def save_data(self):
@@ -1839,7 +1839,7 @@ class RPCCog(commands.Cog):
             color=self.bot.get_color(),
             description="**Mini-guia para usar o app para exibir a música que você está ouvindo via RPC:\n\n"
                         "Faça o download do app (musicbot_rpc.zip) "
-                        "[aqui](https://github.com/zRitsu/Discord-MusicBot-RPC/releases).\n\n"
+                        "[aqui]().\n\n"
                         "Extraia o musicbot_rpc.zip e na pasta abra o musicbot_rpc." \
                         "Adicione o link do websocket abaixo no app (aba: Socket Settings):** ```ansi\n" \
                         f"{(self.bot.config['RPC_PUBLIC_URL'] or self.bot.config['RPC_SERVER']).replace('$PORT', os.environ.get('PORT', '80'))}```"
