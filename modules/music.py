@@ -179,23 +179,23 @@ class Music(commands.Cog):
 
             await player.process_save_queue()
 
-            player.set_command_log(text="ativou o status automático", emoji="📢")
+            player.set_command_log(text="activated automatic status", emoji="📢")
 
             player.update = True
 
             if isinstance(inter, CustomContext):
-                await inter.send("**O status automático foi definido com sucesso!**")
+                await inter.send("**The automatic status has been successfully set!**")
             else:
-                await inter.edit_original_message("**O status automático foi definido com sucesso!**")
+                await inter.edit_original_message("**The automatic status has been successfully set!**")
 
 
-    @set_voice_status.autocomplete("modelo")
+    @set_voice_status.autocomplete("model")
     async def default_models(self, inter: disnake.Interaction, query: str):
         return [
             "{track.title} - By: {track.author} | {track.timestamp}",
             "{track.emoji} | {track.title}",
             "{track.title} ( {track.playlist} )",
-            "{track.title}  Solicitado por: {requester.name}",
+            "{track.title}  Requested by: {requester.name}",
         ]
 
     play_cd = commands.CooldownMapping.from_cooldown(3, 12, commands.BucketType.member)
@@ -269,7 +269,7 @@ class Music(commands.Cog):
             manual_bot_choice=manual_bot_choice
         )
 
-    @search.autocomplete("busca")
+    @search.autocomplete("search")
     async def search_autocomplete(self, inter: disnake.Interaction, current: str):
 
         if not current:
@@ -420,10 +420,10 @@ class Music(commands.Cog):
                 await text_channel.send(
                     embed=disnake.Embed(
                         title="Aviso:",
-                        description="Para manter sua privacidade e me ajudar a economizar "
-                                    "recursos, recomendo desativar meu áudio do canal clicando "
-                                    "com botão direito sobre mim e em seguida marcar: desativar "
-                                    "áudio no servidor.",
+                        description="To maintain your privacy and help me save money "
+                                    "resources, I recommend disabling my channel audio by clicking "
+                                    "Right-click on me and then select: disable "
+                                    "audio on server.",
                         color=self.bot.get_color(me),
                     ).set_image(
                         url="https://cdn.discordapp.com/attachments/554468640942981147/1012533546386210956/unknown.png"
@@ -474,7 +474,7 @@ class Music(commands.Cog):
                                  force_play="no", manual_selection=False, server=None)
 
     stage_flags = CommandArgparse()
-    stage_flags.add_argument('query', nargs='*', help="nome ou link da música")
+    stage_flags.add_argument('query', nargs='*', help="song name or link")
     stage_flags.add_argument('-position', '-pos', '-p', type=int, default=0, help='Colocar a música em uma posição específica da fila (será ignorado caso use -next etc).\nEx: -p 10')
     stage_flags.add_argument('-next', '-proximo', action='store_true', help='Adicionar a música/playlist no topo da fila (equivalente ao: -pos 1)')
     stage_flags.add_argument('-reverse', '-r', action='store_true', help='Inverter a ordem das músicas adicionadas (efetivo apenas ao adicionar playlist).')
@@ -489,7 +489,7 @@ class Music(commands.Cog):
     @commands.bot_has_guild_permissions(send_messages=True)
     @check_voice()
     @commands.max_concurrency(1, commands.BucketType.member)
-    @pool_command(name="play", description="Tocar música em um canal de voz.", aliases=["p"], check_player=False,
+    @pool_command(name="play", description="Play music on a voice channel.", aliases=["p"], check_player=False,
                   cooldown=play_cd, max_concurrency=play_mc, extras={"flags": stage_flags},
                   usage="{prefix}{cmd} [nome|link]\nEx: {prefix}{cmd} sekai - burn me down")
     async def play_legacy(self, ctx: CustomContext, *, flags: str = ""):
@@ -524,7 +524,7 @@ class Music(commands.Cog):
     @check_voice()
     @commands.slash_command(
         name="play_music_file",
-        description=f"{desc_prefix}Tocar arquivo de música em um canal de voz.",
+        description=f"{desc_prefix}Play a music file on a voice channel.",
         extras={"check_player": False}, cooldown=play_cd, max_concurrency=play_mc
     )
     @commands.contexts(guild=True)
@@ -551,7 +551,7 @@ class Music(commands.Cog):
                 description="Selecionar um bot disponível manualmente.",
                 default="no",
                 choices=[
-                    disnake.OptionChoice(disnake.Localized("Yes", data={disnake.Locale.pt_BR: "Sim"}), "yes"),
+                    disnake.OptionChoice(disnake.Localized("Yes", data={disnake.Locale.pt_BR: "Yes"}), "No"),
                 ]
             ),
     ):
@@ -777,7 +777,7 @@ class Music(commands.Cog):
                             func = msg.edit
                         except AttributeError:
                             func = inter.edit_original_message
-                        await func(embed=disnake.Embed(description="### Você não está conectado em um canal de voz...",
+                        await func(embed=disnake.Embed(description="### You are not connected to a voice channel...",
                                                        color=self.bot.get_color(guild.me)), view=None)
                         return
 
@@ -5278,13 +5278,13 @@ class Music(commands.Cog):
         if player.stage_title_event and (time_:=int((disnake.utils.utcnow() - player.start_time).total_seconds())) < time_limit and not (await bot.is_owner(inter.author)):
             raise GenericError(
                 f"**You will have to wait. {time_format((time_limit - time_) * 1000, use_names=True)} to use this function "
-                f"with automatic announcement of the active stage...**"
+                f"com o anúncio automático do palco ativo...**"
             )
 
     async def player_controller(self, interaction: disnake.MessageInteraction, control: str, **kwargs):
 
         if not self.bot.bot_ready or not self.bot.is_ready():
-            await interaction.send("I'm still initializing...", ephemeral=True)
+            await interaction.send("Ainda estou inicializando...", ephemeral=True)
             return
 
         if not interaction.guild_id:
@@ -5313,7 +5313,7 @@ class Music(commands.Cog):
                 try:
                     await self.player_interaction_concurrency.acquire(interaction)
                 except:
-                    raise GenericError("There is a song being processed at the moment....")
+                    raise GenericError("Há uma música sendo processada no momento...")
 
                 bot: Optional[BotCore] = None
                 player: Optional[LavalinkPlayer] = None
@@ -5335,8 +5335,8 @@ class Music(commands.Cog):
 
                         if p.locked:
                             raise GenericError(
-                                "**This action cannot be performed while music is being processed. "
-                                "(Please wait a few more seconds and try again.).**")
+                                "**Não é possível executar essa ação com o processamento da música em andamento "
+                                "(por favor aguarde mais alguns segundos e tente novamente).**")
 
                         player = p
                         bot = b
@@ -5345,10 +5345,10 @@ class Music(commands.Cog):
                         break
 
                 if not channel:
-                    raise GenericError("Theres no bots are available at this time..")
+                    raise GenericError("Não há bots disponíveis no momento.")
 
                 if not author.voice:
-                    raise GenericError("You must join a voice channel to use this button.....")
+                    raise GenericError("Você deve entrar em um canal de voz pra usar esse botão....")
 
                 try:
                     node = player.node
