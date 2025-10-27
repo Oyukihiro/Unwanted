@@ -5176,7 +5176,7 @@ class Music(commands.Cog):
     ):
 
         if not command:
-            raise GenericError("comando não encontrado/implementado.")
+            raise GenericError("Command not found/implemented.")
 
         try:
             interaction.application_command = command
@@ -5205,7 +5205,7 @@ class Music(commands.Cog):
     async def guild_pin(self, interaction: disnake.MessageInteraction):
 
         if not self.bot.bot_ready:
-            await interaction.send("Ainda estou inicializando...\nPor favor aguarde mais um pouco...", ephemeral=True)
+            await interaction.send("I'm still getting started....\nPlease wait a little...", ephemeral=True)
             return
 
         if interaction.data.custom_id != "player_guild_pin":
@@ -5216,7 +5216,7 @@ class Music(commands.Cog):
             return
 
         if not interaction.user.voice:
-            await interaction.send("Você deve entrar em um canal de voz para usar isto.", ephemeral=True)
+            await interaction.send("You must need to join a voice channel to use this..", ephemeral=True)
             return
 
         await interaction.response.defer(ephemeral=True)
@@ -5226,7 +5226,7 @@ class Music(commands.Cog):
         try:
             query = interaction.data.values[0]
         except KeyError:
-            await interaction.send("**O item selecionado não foi encontrado na base de dados...**", ephemeral=True)
+            await interaction.send("**The selected item was not found in the database....**", ephemeral=True)
             await send_idle_embed(interaction.message, bot=self.bot, guild_data=guild_data, force=True)
             return
 
@@ -5277,7 +5277,7 @@ class Music(commands.Cog):
 
         if player.stage_title_event and (time_:=int((disnake.utils.utcnow() - player.start_time).total_seconds())) < time_limit and not (await bot.is_owner(inter.author)):
             raise GenericError(
-                f"**Você terá que aguardar {time_format((time_limit - time_) * 1000, use_names=True)} para usar essa função "
+                f"**You will have to wait. {time_format((time_limit - time_) * 1000, use_names=True)} to use this function "
                 f"com o anúncio automático do palco ativo...**"
             )
 
