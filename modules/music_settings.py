@@ -1059,14 +1059,14 @@ class MusicSettings(commands.Cog):
         await self.add_dj_role.callback(self=self, interaction=ctx, role=role)
 
     @commands.slash_command(
-        description=f"{desc_prefix}Adicionar um cargo para a lista de DJ's do servidor.",
+        description=f"{desc_prefix}Add a role to the server's DJ list.",
         default_member_permissions=disnake.Permissions(manage_guild=True), cooldown=djrole_cd, max_concurrency=djrole_mc
     )
     @commands.contexts(guild=True)
     async def add_dj_role(
             self,
             interaction: disnake.ApplicationCommandInteraction,
-            role: disnake.Role = commands.Param(name="cargo", description="Cargo")
+            role: disnake.Role = commands.Param(name="role", description="role")
     ):
 
         inter, bot = await select_bot_pool(interaction)
@@ -1074,13 +1074,13 @@ class MusicSettings(commands.Cog):
         role = guild.get_role(role.id)
 
         if role == guild.default_role:
-            await inter.send("Você não pode adicionar esse cargo.", ephemeral=True)
+            await inter.send("You cannot add this role..", ephemeral=True)
             return
 
         guild_data = await bot.get_data(inter.guild_id, db_name=DBModel.guilds)
 
         if str(role.id) in guild_data['djroles']:
-            await inter.send(f"O cargo {role.mention} já está na lista de DJ's", ephemeral=True)
+            await inter.send(f"The role {role.mention} já está na lista de DJ's", ephemeral=True)
             return
 
         guild_data['djroles'].append(str(role.id))
@@ -1137,14 +1137,14 @@ class MusicSettings(commands.Cog):
     skin_mc =commands.MaxConcurrency(1, per=commands.BucketType.member, wait=False)
 
     @commands.has_guild_permissions(manage_guild=True)
-    @commands.command(description="Alterar aparência/skin do player.", name="changeskin", aliases=["skin", "skins"],
+    @commands.command(description="Change the appearance/skin of the player.", name="changeskin", aliases=["skin", "skins"],
                       cooldown=skin_cd, max_concurrency=skin_mc)
     async def change_skin_legacy(self, ctx: CustomContext):
 
         await self.change_skin.callback(self=self, interaction=ctx)
 
     @commands.slash_command(
-        description=f"{desc_prefix}Alterar aparência/skin do player.", cooldown=skin_cd, max_concurrency=skin_mc,
+        description=f"{desc_prefix}Change the appearance/skin of the player.", cooldown=skin_cd, max_concurrency=skin_mc,
         default_member_permissions=disnake.Permissions(manage_guild=True)
     )
     @commands.contexts(guild=True)
@@ -1185,7 +1185,7 @@ class MusicSettings(commands.Cog):
         embed = disnake.Embed(
             description="```ansi\n[31;1mModo Normal:[0m``` " + ", ".join(f"[`[{s}]`]({bot.player_skins[s].preview})" for s in skin_list) + "\n\n" 
                         "```ansi\n[33;1mModo Fixo (Song-Request):[0m``` " + ", ".join(f"[`[{s}]`]({bot.player_static_skins[s].preview})" for s in static_skin_list) +
-                        "\n\n`Nota: No modo global a skin será aplicada globalmente em todos os bots.`",
+                        "\n\n`Note: In global mode, the skin will be applied globally to all bots.`",
             colour=bot.get_color(guild.me)
         ).set_image("https://cdn.discordapp.com/attachments/554468640942981147/1082887587770937455/rainbow_bar2.gif")
 
@@ -1525,14 +1525,14 @@ class MusicSettings(commands.Cog):
     @commands.command(
         name="nodeinfo",
         aliases=["llservers", "ll"],
-        description="Ver informações dos servidores de música."
+        description="View music server information."
     )
     async def nodeinfo_legacy(self, ctx: CustomContext):
         await self.nodeinfo.callback(self=self, interaction=ctx)
 
     @commands.cooldown(1, 5, commands.BucketType.user)
     @commands.slash_command(
-        description=f"{desc_prefix}Ver informações dos servidores de música (lavalink servers)."
+        description=f"{desc_prefix}View information about music servers (lavalink servers)."
     )
     @commands.contexts(guild=True)
     async def nodeinfo(self, interaction: disnake.ApplicationCommandInteraction):
@@ -1549,7 +1549,7 @@ class MusicSettings(commands.Cog):
         embeds = []
 
         if not bot.music.nodes:
-            raise GenericError("**Não há servidores de música.**")
+            raise GenericError("**There are no music servers.**")
 
         failed_nodes = set()
 
@@ -1565,7 +1565,7 @@ class MusicSettings(commands.Cog):
 
         for page in disnake.utils.as_chunks(available_nodes, 6):
 
-            em = disnake.Embed(color=color, title="Servidores de música:")
+            em = disnake.Embed(color=color, title="Music servers:")
 
             for identifier, node in page:
 
@@ -1602,7 +1602,7 @@ class MusicSettings(commands.Cog):
                     txt += "\n"
 
                 if node.website:
-                    txt += f'[`Website do server`]({node.website})\n'
+                    txt += f'[`Server website`]({node.website})\n'
 
                 status = "🌟" if current_player else "✅"
 
@@ -1611,7 +1611,7 @@ class MusicSettings(commands.Cog):
             em.set_footer(text=f"{bot.user} - [{bot.user.id}]", icon_url=bot.user.display_avatar.with_format("png").url)
 
             if failed_nodes:
-                em.add_field(name="**Servidores que falharam** `❌`",
+                em.add_field(name="**Servers that failed** `❌`",
                              value=f"```ansi\n[31;1m" + "\n".join(failed_nodes) + "[0m\n```", inline=False)
 
             embeds.append(em)
