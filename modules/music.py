@@ -4535,11 +4535,11 @@ class Music(commands.Cog):
         return list(set([track.playlist_name for track in player.queue if track.playlist_name and
                          query.lower() in track.playlist_name.lower()]))[:20]
 
-    @rotate.autocomplete("nome")
-    @move.autocomplete("nome")
-    @skip.autocomplete("nome")
-    @skipto.autocomplete("nome")
-    @remove.autocomplete("nome")
+    @rotate.autocomplete("name")
+    @move.autocomplete("name")
+    @skip.autocomplete("name")
+    @skipto.autocomplete("name")
+    @remove.autocomplete("name")
     async def queue_tracks(self, inter: disnake.ApplicationCommandInteraction, query: str):
 
         try:
@@ -4625,7 +4625,7 @@ class Music(commands.Cog):
     @is_dj()
     @has_player()
     @check_voice()
-    @pool_command(name="restrictmode", aliases=["rstc", "restrict", "restrito", "modorestrito"], only_voiced=True, cooldown=restrict_cd, max_concurrency=restrict_mc,
+    @pool_command(name="restrictmode", aliases=["rstc", "restrict", "restrict", "restricted mode"], only_voiced=True, cooldown=restrict_cd, max_concurrency=restrict_mc,
                   description="the restricted mode of player commands (which requires DJ/Staff)")
     async def restrict_mode_legacy(self, ctx: CustomContext):
 
@@ -4665,7 +4665,7 @@ class Music(commands.Cog):
     @check_voice()
     @commands.has_guild_permissions(manage_guild=True)
     @pool_command(name="247", aliases=["nonstop"], only_voiced=True, cooldown=nonstop_cd, max_concurrency=nonstop_mc,
-                  description="Ativar/Desativar o modo 24/7 do player (Em testes).")
+                  description="Enable/Disable mode 24/7 the player (In test).")
     async def nonstop_legacy(self, ctx: CustomContext):
         await self.nonstop.callback(self=self, inter=ctx)
 
@@ -4716,7 +4716,7 @@ class Music(commands.Cog):
     @has_player()
     @check_voice()
     @pool_command(name="autoplay", aliases=["ap", "aplay"], only_voiced=True, cooldown=autoplay_cd, max_concurrency=autoplay_mc,
-                  description="Ativar/Desativar a reprodução automática ao acabar as músicas da fila.")
+                  description="Enable/Disable auto play when the songs in the queue are finished.")
     async def autoplay_legacy(self, ctx: CustomContext):
         await self.autoplay.callback(self=self, inter=ctx)
 
@@ -4724,7 +4724,7 @@ class Music(commands.Cog):
     @check_voice()
     @commands.slash_command(
         name="autoplay",
-        description=f"{desc_prefix}Ativar/Desativar a reprodução automática ao acabar as músicas da fila.",
+        description=f"{desc_prefix}Enable/Disable auto play when the songs in the queue are finished.",
         extras={"only_voiced": True}, cooldown=autoplay_cd, max_concurrency=autoplay_mc
     )
     @commands.contexts(guild=True)
@@ -5757,13 +5757,13 @@ class Music(commands.Cog):
             if control == PlayerControls.help_button:
                 embed = disnake.Embed(
                     description="📘 **IFORMAÇÕES SOBRE OS BOTÕES** 📘\n\n"
-                                "⏯️ `= Pausar/Retomar a música.`\n"
-                                "⏮️ `= Voltar para a música tocada anteriormente.`\n"
-                                "⏭️ `= Pular para a próxima música.`\n"
-                                "🔀 `= Misturar as músicas da fila.`\n"
-                                "🎶 `= Adicionar música/playlist/favorito.`\n"
+                                "⏯️ `= Pause/Retomar a music.`\n"
+                                "⏮️ `= Voltar para a music tocada anteriormente.`\n"
+                                "⏭️ `= Skip para a próxima music.`\n"
+                                "🔀 `= Misturar as music da fila.`\n"
+                                "🎶 `= Adicionar music/playlist/favorito.`\n"
                                 "⏹️ `= Parar o player e me desconectar do canal.`\n"
-                                "📑 `= Exibir a fila de música.`\n"
+                                "📑 `= Exibir a fila de music.`\n"
                                 "🛠️ `= Alterar algumas configurações do player:`\n"
                                 "`volume / efeito nightcore / repetição / modo restrito.`\n",
                     color=self.bot.get_color(interaction.guild.me)
@@ -6088,7 +6088,7 @@ class Music(commands.Cog):
                     )
 
                 if not multichoice_opts:
-                    raise GenericError("Você deve incluir pelo menos uma informação")
+                    raise GenericError("You must include at least one of information.")
                 
                 if len(multichoice_opts) > 1:
 
