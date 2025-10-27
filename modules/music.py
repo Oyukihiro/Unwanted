@@ -2638,7 +2638,7 @@ class Music(commands.Cog):
         await player.update_stage_topic()
         await player.process_rpc()
 
-    @seek.autocomplete("tempo")
+    @seek.autocomplete("time")
     async def seek_suggestions(self, inter: disnake.Interaction, query: str):
 
         try:
