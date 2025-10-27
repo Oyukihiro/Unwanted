@@ -205,7 +205,7 @@ class Node:
             self.update_info(info)
 
         else:
-            print(f"📶 - {self._client.bot.user} - Iniciando servidor de música: {self.identifier}")
+            print(f"📶 - {self._client.bot.user} - Starting music server: {self.identifier}")
             while not self._client.bot.is_closed():
                 try:
                     async with self._client.bot.session.get(f"{self.rest_uri}/v4/info", timeout=45, headers={'Authorization': self.password}) as r:

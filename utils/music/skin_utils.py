@@ -68,7 +68,7 @@ def replaces(
             replace('{track.thumb}', player.current.thumb). \
             replace('{playlist.name}', player.current.playlist_name or "Sem playlist"). \
             replace('{playlist.url}', player.current.playlist_url or player.controller_link). \
-            replace('{player.loop.mode}', 'Desativado' if not player.loop else 'Música atual' if player.loop == "current" else "Fila"). \
+            replace('{player.loop.mode}', 'Disabled' if not player.loop else 'Current song' if player.loop == "current" else "Queue"). \
             replace('{player.queue.size}', str(len(player.queue or player.queue_autoplay))). \
             replace('{player.volume}', str(player.volume)). \
             replace('{player.autoplay}', "Ativado" if player.autoplay else "Desativado"). \
@@ -107,13 +107,13 @@ def replaces(
             replace('{track.thumb}', "https://img.youtube.com/vi/2vFA0HL9kTk/mqdefault.jpg"). \
             replace('{playlist.name}', "🎵 DV 🎶"). \
             replace('{playlist.url}', "https://www.youtube.com/playlist?list=PLKlXSJdWVVAD3iztmL2vFVrwA81sRkV7n"). \
-            replace('{player.loop.mode}', "Música Atual"). \
+            replace('{player.loop.mode}', "Current Song"). \
             replace('{player.queue.size}', f"{queue_max_entries}"). \
             replace('{player.volume}', "100"). \
             replace('{player.autoplay}', "Ativado"). \
             replace('{player.nightcore}', "Ativado"). \
             replace('{player.log.emoji}', "⏭️"). \
-            replace('{player.log.text}', f"{ctx.author} pulou a música."). \
+            replace('{player.log.text}', f"{ctx.author} skipped the song."). \
             replace('{requester.global_name}', ctx.author.global_name). \
             replace('{requester.display_name}', ctx.author.display_name). \
             replace('{requester.mention}', ctx.author.mention). \
@@ -122,7 +122,7 @@ def replaces(
             replace('{guild.icon}', guild.icon.with_static_format("png").url if guild.icon else ""). \
             replace('{guild.name}', guild.name). \
             replace('{guild.id}', str(guild.id)). \
-            replace('{queue_format}', queue_text or "(Sem músicas).")
+            replace('{queue_format}', queue_text or "(No songs).")
 
     return txt
 

@@ -47,9 +47,9 @@ def download_file(url, filename):
                         speed_txt = "MB/s"
                     else:
                         speed_txt = "KB/s"
-                    print(f"Download do arquivo {filename} {current_progress}% concluído ({download_speed:.2f} {speed_txt} / {total_txt})")
+                    print(f"Download the file {filename} {current_progress}% completed ({download_speed:.2f} {speed_txt} / {total_txt})")
                 except:
-                    print(f"Download do arquivo {filename} {current_progress}% concluído")
+                    print(f"Download the file {filename} {current_progress}% completed")
 
     r.close()
 
@@ -64,8 +64,10 @@ def validate_java(cmd: str, debug: bool = False):
             return cmd
     except Exception as e:
         if debug:
-                print(f"\nFailed to get Java version...\n"
-                  f"Path: {cmd} | Error: {repr(e)}\n")def run_lavalink(
+            print(f"\nerror when obtaining java version...\n"
+                  f"Path: {cmd} | Erro: {repr(e)}\n")
+
+def run_lavalink(
         lavalink_file_url: str = None,
         lavalink_initial_ram: int = 30,
         lavalink_ram_limit: int = 100,
@@ -159,7 +161,7 @@ def validate_java(cmd: str, debug: bool = False):
 
                 if not extracted_folder:
                     raise Exception(
-                        f"JDK não encontrando no diretório: {tmp_dir}/.java\n" + "\n".join(java_dirs)
+                        f"JDK not found in directory: {tmp_dir}/.java\n" + "\n".join(java_dirs)
                     )
 
                 for item in os.listdir(extracted_folder):
@@ -256,13 +258,13 @@ def validate_java(cmd: str, debug: bool = False):
 
     java_cmd += " -jar Lavalink.jar"
 
-    print("🌋 - Iniciando o servidor Lavalink (dependendo da hospedagem o lavalink pode demorar iniciar, "
-          "o que pode ocorrer falhas em algumas tentativas de conexão até ele iniciar totalmente).")
+    print("🌋 - Starting the Lavalink server (depending on the hosting, Lavalink may take a while to start, "
+          "which may cause some connection attempts to fail until it starts completely).")
 
     lavalink_process = subprocess.Popen(java_cmd.split(), stdout=subprocess.DEVNULL)
 
     if lavalink_additional_sleep:
-        print(f"🕙 - Aguarde {lavalink_additional_sleep} segundos...")
+        print(f"🕙 - Wait {lavalink_additional_sleep} seconds...")
         time.sleep(lavalink_additional_sleep)
 
     return lavalink_process

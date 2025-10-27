@@ -243,7 +243,7 @@ class EmbedPaginator(disnake.ui.View):
 
 
 song_request_buttons = [
-    disnake.ui.Button(label="Pedir uma música", emoji="🎶", custom_id=PlayerControls.add_song),
+    disnake.ui.Button(label="Request a song", emoji="🎶", custom_id=PlayerControls.add_song),
 ]
 
 
@@ -410,7 +410,7 @@ async def send_idle_embed(
         except:
             continue
 
-    embed = disnake.Embed(description="**Entre em um canal de voz e peça uma música aqui " +
+    embed = disnake.Embed(description="**Join a voice channel and request a song here " +
                                       ("no post" if is_forum else "no canal ou na conversa abaixo") +
                                       f" (ou clique no botão abaixo ou use o comando {cmd} aqui ou em algum outro canal)**\n\n"
                                       "**Você pode usar um nome ou um link de site compatível:**\n"
@@ -430,7 +430,7 @@ async def send_idle_embed(
     if opts:
         components.append(
             disnake.ui.Select(
-                placeholder="Músicas/Playlists do servidor.",
+                placeholder="Server Songs/Playlists.",
                 options=opts, custom_id="player_guild_pin",
                 min_values=0, max_values=1, required = False,
             )
@@ -439,7 +439,7 @@ async def send_idle_embed(
     components.extend(song_request_buttons)
 
     if is_forum:
-        content = "🎶 Entre em um canal de voz e peça sua música aqui."
+        content = "🎶 Join a voice channel and request your song here."
     else:
         content = None
 

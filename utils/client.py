@@ -589,7 +589,7 @@ class BotPool:
             except Exception:
                 traceback.print_exc()
                 ini_file = "auto_lavalink.ini"
-                print(f"Downloading list of Lavalink servers (file: {ini_file})")
+                print(f"Baixando lista de servidores lavalink (arquivo: {ini_file})")
                 try:
                     r = requests.get(self.config["LAVALINK_SERVER_LIST"], allow_redirects=False)
                     with open("auto_lavalink.ini", 'wb') as f:
@@ -644,7 +644,7 @@ class BotPool:
                                                 cache_ttl=self.config["DBCACHE_TTL"])
             print("🍃 - Database em uso: MongoDB")
         else:
-            print("🎲 - Database in use: TinyMongo | Note: Database files will be saved locally in the folder: local_database")
+            print("🎲 - Database em uso: TinyMongo | Nota: Os arquivos da database serão salvos localmente na pasta: local_database")
 
         self.local_database = LocalDatabase(cache_maxsize=self.config["DBCACHE_SIZE"],
                                             cache_ttl=self.config["DBCACHE_TTL"])
@@ -723,7 +723,7 @@ class BotPool:
                 pass
 
             if not token:
-                print(f"{bot_name} Ignored (token not specified)...")
+                print(f"{bot_name} Ignorado (token não informado)...")
                 return
 
             try:
@@ -754,8 +754,8 @@ class BotPool:
                 async def check_commands(ctx: CustomContext):
 
                     if not (await bot.is_owner(ctx.author)):
-                        raise GenericError("**Text commands are disabled!\n"
-                                           "Use the slash commands /**", self_delete=True, delete_original=15)
+                        raise GenericError("**Os comandos de texto estão desativados!\n"
+                                           "Use os comandos de barra /**", self_delete=True, delete_original=15)
 
                     return True
 
@@ -796,7 +796,7 @@ class BotPool:
                     allow_private = False
 
                 if inter.bot.exclusive_guild_id and inter.guild_id != inter.bot.exclusive_guild_id:
-                    raise GenericError("This server is not authorized to use my commands...")
+                    raise GenericError("Esse servidor não está autorizado para usar meus comandos...")
 
                 if self.config["COMMAND_LOG"] and inter.guild and not (await inter.bot.is_owner(inter.author)):
                     try:
@@ -812,8 +812,8 @@ class BotPool:
                     if allow_private:
                         return True
 
-                    raise GenericError("This command cannot be executed in private messages.\n"
-                                     "Use on any server where a compatible bot has been added.")
+                    raise GenericError("Esse comando não pode ser executado em mensagens privadas.\n"
+                                     "Use em algum servidor onde há bot compatível adicionado.")
 
                 if not allow_private and not isinstance(inter.guild, disnake.Guild):
 
@@ -828,7 +828,7 @@ class BotPool:
 
                     if not available_bot:
                         raise GenericError(
-                            "**There are no bots available on the server. Add at least one by clicking the button below.**",
+                            "**Não há bots disponíveis no servidor, Adicione pelo menos um clicando no botão abaixo.**",
                             components=[disnake.ui.Button(custom_id="bot_invite", label="Adicionar bots")])
 
                 if not kwargs:
@@ -932,17 +932,17 @@ class BotPool:
 
         if not self.bots:
 
-            message = "The bot token has not been configured correctly!"
+            message = "O token do bot não foi configurado devidamente!"
 
             if os.environ.get("REPL_SLUG"):
-                message += f"Check if the token has been added to the replit secrets."
+                message += f"Confira se o token foi adicionado nas secrets da replit"
 
                 print(message + ": Guia de como configurar: https://gist.github.com/zRitsu/70737984cbe163f890dae05a80a3ddbe#2---com-o-projeto-j%C3%A1-criado-prossiga-as-etapas-abaixo")
 
                 message += f'. <a href="https://gist.github.com/zRitsu/70737984cbe163f890dae05a80a3ddbe#2---com-o-projeto-j%C3%A1-criado-prossiga-as-etapas-abaixo" target="_blank">Clique aqui</a> para ver o guia de como configurar.'
 
             else:
-                message += " Check if the token has been configured in ENV/ENVIRONMENT or in the .env file."
+                message += " Confira se o token foi configurado na ENV/ENVIRONMENT ou no arquivo .env"
 
                 print(f"⚠️ - {message}")
 
@@ -1017,7 +1017,7 @@ class BotCore(commands.AutoShardedBot):
             try:
                 self.env_owner_ids.add(int(i))
             except ValueError:
-                print(f"Invalid Owner_ID: {i}")
+                print(f"Owner_ID inválido: {i}")
 
     async def edit_voice_channel_status(
             self, status: Optional[str], *, channel_id: int, reason: Optional[str] = None
@@ -1107,7 +1107,7 @@ class BotCore(commands.AutoShardedBot):
 
         if current_cmds == synced_cmds:
             if current_cmds:
-                print(f"⚠️ - {self.user} - The commands are already synchronized..")
+                print(f"⚠️ - {self.user} - Os comandos já estão sincronizados.")
             return
 
         self._command_sync_flags = self.pool.command_sync_config
@@ -1224,18 +1224,18 @@ class BotCore(commands.AutoShardedBot):
             if not isinstance(prefix, str):
                 prefix = prefix[-1]
 
-            embed.description = f"**Hello {message.author.mention}.**"
+            embed.description = f"**Olá {message.author.mention}.**"
 
             if not self.config["INTERACTION_COMMAND_ONLY"]:
-                embed.description += f"\n\nMMy prefix on the server is: **{prefix}** `(my mention also functions as a prefix).`\n"\
-                                    f"To see all my commands, use **{prefix}help**"
+                embed.description += f"\n\nMeu prefixo no servidor é: **{prefix}** `(minha menção também funciona como prefixo).`\n"\
+                                    f"Pra ver todos os meus comandos use **{prefix}help**"
 
-            embed.description += "\n\n**To see all my commands, use: /**"
+            embed.description += "\n\n**Pra ver todos os meus comandos use: /**"
 
             kwargs = {
                 "components": [
                     disnake.ui.Button(
-                        label="Add me to your server.",
+                        label="Me adicione no seu servidor.",
                         url=disnake.utils.oauth_url(self.user.id, permissions=disnake.Permissions(self.config['INVITE_PERMISSIONS']), scopes=('bot',))
                     )
                 ]
@@ -1314,8 +1314,8 @@ class BotCore(commands.AutoShardedBot):
                     if raise_error is False:
                         return False
 
-                    raise GenericError("**You cannot use prefixed commands in the current post..**\n"
-                                       "`Use the slash command (/) here.`", self_delete=True)
+                    raise GenericError("**Você não pode usar comandos prefixed na postagem atual...**\n"
+                                       "`Use comando de barra (/) aqui.`", self_delete=True)
         except AttributeError:
             pass
 
@@ -1359,12 +1359,12 @@ class BotCore(commands.AutoShardedBot):
                     guilds.add(guild)
 
             warn_msg = f"Atenção: O bot [{self.user}] (ID: {self.user.id}) foi configurado no portal do desenvolvedor " \
-                  "as a public bot\n" \
-                  "remembering that if the bot is disclosed to be added publicly, it will have to " \
-                  "be under the terms of the GPL-2 license: " \
-                  "https://github.com/Oyukihiro/Unwanted?tab=GPL-2.0-1-ov-file\n" \
-                  "If you do not want to follow the license terms on your bot, you can make the bot private by unchecking the " \
-                  f"public bot option by accessing the link: https://discord.com/developers/applications/{self.user.id}/bot"
+                  "como bot público\n" \
+                  "lembrando que se caso o bot seja divulgado pra ser adicionado publicamente o mesmo terá que " \
+                  "estar sob as condições da licença GPL-2: " \
+                  "https://github.com/zRitsu/MuseHeart-MusicBot/blob/main/LICENSE\n" \
+                  "Caso não queira seguir as condições da licença no seu bot, você pode deixar o bot privado desmarcando a " \
+                  f"opção public bot acessando o link: https://discord.com/developers/applications/{self.user.id}/bot"
 
             if guilds:
                 warn_msg += "\n\nAtualmente o bot se encontra em servidores no qual o dono do bot (ou membro da equipe) não "\
@@ -1425,7 +1425,7 @@ class BotCore(commands.AutoShardedBot):
                         self.unload_extension(module_filename)
                         self.load_extension(module_filename)
                         if not self.bot_ready and load_modules_log:
-                            print(f"🟦 - {bot_name} - {filename}.py Reloaded.")
+                            print(f"🟦 - {bot_name} - {filename}.py Recarregado.")
                         load_status["reloaded"].append(f"{filename}.py")
                     except (commands.ExtensionAlreadyLoaded, commands.ExtensionNotLoaded):
                         try:
@@ -1451,7 +1451,7 @@ class BotCore(commands.AutoShardedBot):
 
         for c in self.slash_commands:
             if (desc:=len(c.description)) > 100:
-                raise Exception(f"The command description {c.name} exceeded the allowed number of characters "
-                                f"in discord (100), current quantity: {desc}")
+                raise Exception(f"A descrição do comando {c.name} excedeu a quantidade de caracteres permitido "
+                                f"no discord (100), quantidade atual: {desc}")
 
         return load_status
