@@ -5060,7 +5060,7 @@ class Music(commands.Cog):
             channel_db = None
         except disnake.Forbidden:
             channel_db = bot.get_channel(inter.channel_id)
-            warn_message = f"Não tenho permissão de acessar o canal <#{static_player['channel']}>, o player será usado no modo tradicional."
+            warn_message = f"I don't have permission to access the channel <#{static_player['channel']}>, the player will be used in traditional mode."
             static_player["channel"] = None
 
         if not channel_db or channel_db.guild.id != inter.guild_id:
@@ -5114,7 +5114,7 @@ class Music(commands.Cog):
                                     if not thread:
                                         thread_wmessage = await channel_db.parent.create_thread(
                                             name=f"{bot.user} song-request",
-                                            content="Post para pedido de músicas.",
+                                            content="Post for music requests.",
                                             auto_archive_duration=10080,
                                             slowmode_delay=5,
                                         )
@@ -5135,8 +5135,8 @@ class Music(commands.Cog):
                                 await channel_db.edit(**thread_kw)
 
                             elif isinstance(channel.parent, disnake.ForumChannel):
-                                warn_message = f"**{bot.user.mention} não possui permissão de gerenciar tópicos " \
-                                                f"para desarquivar/destrancar o tópico: {channel_db.mention}**"
+                                warn_message = f"**{bot.user.mention} does not have permission to manage topics " \
+                                                f"to unarchive/unlock the topics: {channel_db.mention}**"
 
                 except AttributeError:
                     pass
