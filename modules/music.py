@@ -4534,8 +4534,8 @@ class Music(commands.Cog):
     @rotate.autocomplete("nome")
     @move.autocomplete("nome")
     @skip.autocomplete("nome")
-    @skipto.autocomplete("nome")
-    @remove.autocomplete("nome")
+    @skipto.autocomplete("name")
+    @remove.autocomplete("name")
     async def queue_tracks(self, inter: disnake.ApplicationCommandInteraction, query: str):
 
         try:
