@@ -1227,15 +1227,15 @@ class BotCore(commands.AutoShardedBot):
             embed.description = f"**Olá {message.author.mention}.**"
 
             if not self.config["INTERACTION_COMMAND_ONLY"]:
-                embed.description += f"\n\nMeu prefixo no servidor é: **{prefix}** `(minha menção também funciona como prefixo).`\n"\
-                                    f"Pra ver todos os meus comandos use **{prefix}help**"
+                embed.description += f"\n\nMMy prefix on the server is: **{prefix}** `(my mention also functions as a prefix).`\n"\
+                                    f"To see all my commands, use **{prefix}help**"
 
-            embed.description += "\n\n**Pra ver todos os meus comandos use: /**"
+            embed.description += "\n\n**To see all my commands, use: /**"
 
             kwargs = {
                 "components": [
                     disnake.ui.Button(
-                        label="Me adicione no seu servidor.",
+                        label="Add me to your server.",
                         url=disnake.utils.oauth_url(self.user.id, permissions=disnake.Permissions(self.config['INVITE_PERMISSIONS']), scopes=('bot',))
                     )
                 ]
@@ -1314,8 +1314,8 @@ class BotCore(commands.AutoShardedBot):
                     if raise_error is False:
                         return False
 
-                    raise GenericError("**Você não pode usar comandos prefixed na postagem atual...**\n"
-                                       "`Use comando de barra (/) aqui.`", self_delete=True)
+                    raise GenericError("**You cannot use prefixed commands in the current post..**\n"
+                                       "`Use the slash command (/) here.`", self_delete=True)
         except AttributeError:
             pass
 
@@ -1359,12 +1359,12 @@ class BotCore(commands.AutoShardedBot):
                     guilds.add(guild)
 
             warn_msg = f"Atenção: O bot [{self.user}] (ID: {self.user.id}) foi configurado no portal do desenvolvedor " \
-                  "como bot público\n" \
-                  "lembrando que se caso o bot seja divulgado pra ser adicionado publicamente o mesmo terá que " \
-                  "estar sob as condições da licença GPL-2: " \
-                  "https://github.com/zRitsu/MuseHeart-MusicBot/blob/main/LICENSE\n" \
-                  "Caso não queira seguir as condições da licença no seu bot, você pode deixar o bot privado desmarcando a " \
-                  f"opção public bot acessando o link: https://discord.com/developers/applications/{self.user.id}/bot"
+                  "as a public bot\n" \
+                  "remembering that if the bot is disclosed to be added publicly, it will have to " \
+                  "be under the terms of the GPL-2 license: " \
+                  "https://github.com/Oyukihiro/Unwanted?tab=GPL-2.0-1-ov-file\n" \
+                  "If you do not want to follow the license terms on your bot, you can make the bot private by unchecking the " \
+                  f"public bot option by accessing the link: https://discord.com/developers/applications/{self.user.id}/bot"
 
             if guilds:
                 warn_msg += "\n\nAtualmente o bot se encontra em servidores no qual o dono do bot (ou membro da equipe) não "\
@@ -1451,7 +1451,7 @@ class BotCore(commands.AutoShardedBot):
 
         for c in self.slash_commands:
             if (desc:=len(c.description)) > 100:
-                raise Exception(f"A descrição do comando {c.name} excedeu a quantidade de caracteres permitido "
-                                f"no discord (100), quantidade atual: {desc}")
+                raise Exception(f"The command description {c.name} exceeded the allowed number of characters "
+                                f"in discord (100), current quantity: {desc}")
 
         return load_status
