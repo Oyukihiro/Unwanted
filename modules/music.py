@@ -5345,10 +5345,10 @@ class Music(commands.Cog):
                         break
 
                 if not channel:
-                    raise GenericError("Não há bots disponíveis no momento.")
+                    raise GenericError("Theres no bots are available at this time..")
 
                 if not author.voice:
-                    raise GenericError("Você deve entrar em um canal de voz pra usar esse botão....")
+                    raise GenericError("You must join a voice channel to use this button.....")
 
                 try:
                     node = player.node
