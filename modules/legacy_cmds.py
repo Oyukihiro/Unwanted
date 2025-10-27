@@ -617,7 +617,7 @@ class Owner(commands.Cog):
         guild_data = await self.bot.get_global_data(ctx.guild.id, db_name=DBModel.guilds)
 
         if not guild_data["prefix"]:
-            raise GenericError("**Nao há prefixo configurado no servidor.**")
+            raise GenericError("**There is no prefix configured on the server.**")
 
         guild_data["prefix"] = ""
         self.bot.pool.guild_prefix_cache[ctx.guild.id] = ""
@@ -625,8 +625,8 @@ class Owner(commands.Cog):
         await self.bot.update_global_data(ctx.guild.id, guild_data, db_name=DBModel.guilds)
 
         embed = disnake.Embed(
-            description=f"**O prefixo do servidor foi resetado com sucesso.\n"
-                        f"O prefixo padrão agora é:** `{disnake.utils.escape_markdown(self.bot.default_prefix)}`",
+            description=f"**The server prefix has been successfully reset.\n"
+                        f"The default prefix is now:** `{disnake.utils.escape_markdown(self.bot.default_prefix)}`",
             color=self.bot.get_color(ctx.guild.me)
         )
 
@@ -635,8 +635,8 @@ class Owner(commands.Cog):
     @commands.cooldown(1, 10, commands.BucketType.guild)
     @commands.command(
         aliases=["uprefix", "spu", "setmyprefix", "spm", "setcustomprefix", "scp", "customprefix", "myprefix"],
-        description="Alterar seu prefixo de usuário (prefixo que irei responder a você independente "
-                    "do prefixo configurado no servidor).",
+        description="Change your user prefix (prefix that I will respond to you regardless of "
+                    "of the prefix configured on the server).",
         usage="{prefix}{cmd} [prefixo]\nEx: {prefix}{cmd} >>"
     )
     async def setuserprefix(self, ctx: CustomContext, prefix: str):
@@ -644,7 +644,7 @@ class Owner(commands.Cog):
         prefix = prefix.strip()
 
         if not prefix or len(prefix) > 5:
-            raise GenericError("**O prefixo não pode conter espaços ou ter acima de 5 caracteres.**")
+            raise GenericError("**The prefix cannot contain spaces or have more than 5 characters.**")
 
         user_data = await self.bot.get_global_data(ctx.author.id, db_name=DBModel.users)
 
@@ -655,7 +655,7 @@ class Owner(commands.Cog):
         prefix = disnake.utils.escape_markdown(prefix)
 
         embed = disnake.Embed(
-            description=f"**O seu prefixo de usuário agora é:** `{prefix}`\n"
+            description=f"**Your user prefix is now:** `{prefix}`\n"
                         f"**Caso queira remover seu prefixo de usuário use o comando:** `{prefix}{self.resetuserprefix.name}`",
             color=self.bot.get_color(ctx.guild.me)
         )
@@ -715,8 +715,8 @@ class Owner(commands.Cog):
 
     @commands.is_owner()
     @panel_command(aliases=["expsource", "export", "exs"],
-                   description="Exportar minha source para um arquivo zip.", emoji="💾",
-                   alt_name="Exportar source/código-fonte.")
+                   description="Export my source to a zip file.", emoji="💾",
+                   alt_name="Export source/source code.")
     async def exportsource(self, ctx:Union[CustomContext, disnake.MessageInteraction], *, flags: str = ""):
 
         if not os.path.isdir(os.environ['GIT_DIR']):
@@ -804,8 +804,8 @@ class Owner(commands.Cog):
 
         try:
             embed = disnake.Embed(
-                description="**Não envie o arquivo source.zip ou o arquivo .env pra ninguém e muito cuidado ao postar "
-                            "print's do conteudo do arquivo .env e não adicione esse arquivo em locais públicos como "
+                description="**Do not send the source.zip file or the .env file to anyone, and be very careful when posting "
+                            “prints” of the contents of the .env file. Do not add this file to public locations such as "
                             "github, repl.it, glitch.com, etc.**",
                 color=self.bot.get_color(ctx.guild.me))
             embed.set_footer(text="Por medida de segurança, esta mensagem será deletada em 2 minutos.")
@@ -883,7 +883,7 @@ class Owner(commands.Cog):
             return
 
         if not await self.bot.is_owner(inter.author):
-            return await inter.send("**Apenas meu dono pode usar este botão!**", ephemeral=True)
+            return await inter.send("**Only my owner can use this button!**", ephemeral=True)
 
         await inter.response.edit_message(
             content="```ini\n🔒 - [Shell Fechado!] - 🔒```",
@@ -921,8 +921,8 @@ class Owner(commands.Cog):
             except disnake.Forbidden:
                 traceback.print_exc()
                 raise GenericError(
-                    "**Ocorreu um erro (verifique os logs/terminal ou libere seu DM para o próximo "
-                    "resultado ser enviado diretamente no seu DM).**"
+                    "**An error occurred (check the logs/terminal or release your DM for the next "
+                    "result to be sent directly to your DM)..**"
                 )
 
         else:
@@ -984,7 +984,7 @@ class Owner(commands.Cog):
 
                 msg = await ctx.send(
                     embed=disnake.Embed(
-                        description=f"**Escolha qual bot você deseja usar no canal {ctx.author.voice.channel.mention}**",
+                        description=f"**Select which bot you want to use on the channel {ctx.author.voice.channel.mention}**",
                         color=self.bot.get_color(guild.me)), view=v
                 )
 
