@@ -215,7 +215,7 @@ class Owner(commands.Cog):
             return txt
 
     @commands.is_owner()
-    @panel_command(aliases=["rds", "recarregarskins"], description="Recarregar skins.", emoji="🎨")
+    @panel_command(aliases=["rds", "recarregarskins"], description="Reload skins.", emoji="🎨")
     async def reloadskins(self, ctx: Union[CustomContext, disnake.MessageInteraction]):
 
         for m in list(sys.modules):
@@ -228,7 +228,7 @@ class Owner(commands.Cog):
 
         self.bot.pool.load_skins()
 
-        txt = "**As skins foram recarregadas com sucesso!**"
+        txt = "**Skins have been successfully reloaded!**"
 
         if isinstance(ctx, CustomContext):
             embed = disnake.Embed(colour=self.bot.get_color(ctx.me), description=txt)
@@ -237,8 +237,8 @@ class Owner(commands.Cog):
             return txt
 
     @commands.is_owner()
-    @panel_command(aliases=["rd", "recarregar"], description="Recarregar módulos.", emoji="🔄",
-                   alt_name="Carregar/Recarregar os módulos.")
+    @panel_command(aliases=["rd", "recarregar"], description="Reload modules.", emoji="🔄",
+                   alt_name="Load/Reload modules.")
     async def reload(self, ctx: Union[CustomContext, disnake.MessageInteraction], *modules):
 
         modules = [f"{m.lower()}.py" for m in modules]
