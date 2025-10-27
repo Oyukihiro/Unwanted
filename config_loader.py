@@ -83,7 +83,7 @@ DEFAULT_CONFIG = {
     ################################################
     ### Sistema de música - RPC (Rich Presence): ###
     ################################################
-    "RUN_RPC_SERVER": false,
+    "RUN_RPC_SERVER": False,
     "RPC_SERVER": "ws://localhost:$PORT/ws",
     "PORT": None,
     "RPC_PUBLIC_URL": "",
