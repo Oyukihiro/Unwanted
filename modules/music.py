@@ -129,7 +129,7 @@ class Music(commands.Cog):
             self, inter: disnake.ApplicationCommandInteraction,
             template: str = commands.Param(
                 name="modelo", default="",
-                description="Especifique manualmente um modelo de status (inclua placeholders)."
+                description="Manually specify a status template (include placeholders)."
             )
     ):
 
@@ -184,9 +184,9 @@ class Music(commands.Cog):
             player.update = True
 
             if isinstance(inter, CustomContext):
-                await inter.send("**O status automático foi definido com sucesso!**")
+                await inter.send("**The automatic status has been successfully set!**")
             else:
-                await inter.edit_original_message("**O status automático foi definido com sucesso!**")
+                await inter.edit_original_message("**The automatic status has been successfully set!**")
 
 
     @set_voice_status.autocomplete("modelo")
@@ -195,7 +195,7 @@ class Music(commands.Cog):
             "{track.title} - By: {track.author} | {track.timestamp}",
             "{track.emoji} | {track.title}",
             "{track.title} ( {track.playlist} )",
-            "{track.title}  Solicitado por: {requester.name}",
+            "{track.title}  Requested by: {requester.name}",
         ]
 
     play_cd = commands.CooldownMapping.from_cooldown(3, 12, commands.BucketType.member)
@@ -208,7 +208,7 @@ class Music(commands.Cog):
     async def message_play(self, inter: disnake.MessageCommandInteraction):
 
         if not inter.target.content:
-            emb = disnake.Embed(description=f"Não há texto na [mensagem]({inter.target.jump_url}) selecionada...",
+            emb = disnake.Embed(description=f"There is no text in the [message].({inter.target.jump_url}) selected...",
                                 color=disnake.Colour.red())
             await inter.send(embed=emb, ephemeral=True)
             return
@@ -231,12 +231,12 @@ class Music(commands.Cog):
     async def search(
             self,
             inter: disnake.ApplicationCommandInteraction,
-            query: str = commands.Param(name="busca", desc="Nome ou link da música."),
+            query: str = commands.Param(name="busca", desc="Name or link of the song."),
             *,
             position: int = commands.Param(name="posição", description="Colocar a música em uma posição específica",
                                            default=0),
             force_play: str = commands.Param(
-                name="tocar_agora",
+                name="play_now",
                 description="Tocar a música imediatamente (ao invés de adicionar na fila).",
                 default="no",
                 choices=[
