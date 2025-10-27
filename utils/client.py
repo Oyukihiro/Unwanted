@@ -589,7 +589,7 @@ class BotPool:
             except Exception:
                 traceback.print_exc()
                 ini_file = "auto_lavalink.ini"
-                print(f"Baixando lista de servidores lavalink (arquivo: {ini_file})")
+                print(f"Downloading list of Lavalink servers (file: {ini_file})")
                 try:
                     r = requests.get(self.config["LAVALINK_SERVER_LIST"], allow_redirects=False)
                     with open("auto_lavalink.ini", 'wb') as f:
@@ -644,7 +644,7 @@ class BotPool:
                                                 cache_ttl=self.config["DBCACHE_TTL"])
             print("🍃 - Database em uso: MongoDB")
         else:
-            print("🎲 - Database em uso: TinyMongo | Nota: Os arquivos da database serão salvos localmente na pasta: local_database")
+            print("🎲 - Database in use: TinyMongo | Note: Database files will be saved locally in the folder: local_database")
 
         self.local_database = LocalDatabase(cache_maxsize=self.config["DBCACHE_SIZE"],
                                             cache_ttl=self.config["DBCACHE_TTL"])
@@ -723,7 +723,7 @@ class BotPool:
                 pass
 
             if not token:
-                print(f"{bot_name} Ignorado (token não informado)...")
+                print(f"{bot_name} Ignored (token not specified)...")
                 return
 
             try:
@@ -812,8 +812,8 @@ class BotPool:
                     if allow_private:
                         return True
 
-                    raise GenericError("Esse comando não pode ser executado em mensagens privadas.\n"
-                                     "Use em algum servidor onde há bot compatível adicionado.")
+                    raise GenericError("This command cannot be executed in private messages.\n"
+                                     "Use on any server where a compatible bot has been added.")
 
                 if not allow_private and not isinstance(inter.guild, disnake.Guild):
 
@@ -828,7 +828,7 @@ class BotPool:
 
                     if not available_bot:
                         raise GenericError(
-                            "**Não há bots disponíveis no servidor, Adicione pelo menos um clicando no botão abaixo.**",
+                            "**There are no bots available on the server. Add at least one by clicking the button below.**",
                             components=[disnake.ui.Button(custom_id="bot_invite", label="Adicionar bots")])
 
                 if not kwargs:
@@ -932,17 +932,17 @@ class BotPool:
 
         if not self.bots:
 
-            message = "O token do bot não foi configurado devidamente!"
+            message = "The bot token has not been configured correctly!"
 
             if os.environ.get("REPL_SLUG"):
-                message += f"Confira se o token foi adicionado nas secrets da replit"
+                message += f"Check if the token has been added to the replit secrets."
 
                 print(message + ": Guia de como configurar: https://gist.github.com/zRitsu/70737984cbe163f890dae05a80a3ddbe#2---com-o-projeto-j%C3%A1-criado-prossiga-as-etapas-abaixo")
 
                 message += f'. <a href="https://gist.github.com/zRitsu/70737984cbe163f890dae05a80a3ddbe#2---com-o-projeto-j%C3%A1-criado-prossiga-as-etapas-abaixo" target="_blank">Clique aqui</a> para ver o guia de como configurar.'
 
             else:
-                message += " Confira se o token foi configurado na ENV/ENVIRONMENT ou no arquivo .env"
+                message += " Check if the token has been configured in ENV/ENVIRONMENT or in the .env file."
 
                 print(f"⚠️ - {message}")
 
@@ -1017,7 +1017,7 @@ class BotCore(commands.AutoShardedBot):
             try:
                 self.env_owner_ids.add(int(i))
             except ValueError:
-                print(f"Owner_ID inválido: {i}")
+                print(f"Invalid Owner_ID: {i}")
 
     async def edit_voice_channel_status(
             self, status: Optional[str], *, channel_id: int, reason: Optional[str] = None
@@ -1107,7 +1107,7 @@ class BotCore(commands.AutoShardedBot):
 
         if current_cmds == synced_cmds:
             if current_cmds:
-                print(f"⚠️ - {self.user} - Os comandos já estão sincronizados.")
+                print(f"⚠️ - {self.user} - The commands are already synchronized..")
             return
 
         self._command_sync_flags = self.pool.command_sync_config
@@ -1224,7 +1224,7 @@ class BotCore(commands.AutoShardedBot):
             if not isinstance(prefix, str):
                 prefix = prefix[-1]
 
-            embed.description = f"**Olá {message.author.mention}.**"
+            embed.description = f"**Hello {message.author.mention}.**"
 
             if not self.config["INTERACTION_COMMAND_ONLY"]:
                 embed.description += f"\n\nMMy prefix on the server is: **{prefix}** `(my mention also functions as a prefix).`\n"\
