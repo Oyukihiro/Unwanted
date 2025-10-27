@@ -5278,13 +5278,13 @@ class Music(commands.Cog):
         if player.stage_title_event and (time_:=int((disnake.utils.utcnow() - player.start_time).total_seconds())) < time_limit and not (await bot.is_owner(inter.author)):
             raise GenericError(
                 f"**You will have to wait. {time_format((time_limit - time_) * 1000, use_names=True)} to use this function "
-                f"com o anúncio automático do palco ativo...**"
+                f"with automatic announcement of the active stage...**"
             )
 
     async def player_controller(self, interaction: disnake.MessageInteraction, control: str, **kwargs):
 
         if not self.bot.bot_ready or not self.bot.is_ready():
-            await interaction.send("Ainda estou inicializando...", ephemeral=True)
+            await interaction.send("I'm still initializing...", ephemeral=True)
             return
 
         if not interaction.guild_id:
@@ -5313,7 +5313,7 @@ class Music(commands.Cog):
                 try:
                     await self.player_interaction_concurrency.acquire(interaction)
                 except:
-                    raise GenericError("Há uma música sendo processada no momento...")
+                    raise GenericError("There is a song being processed at the moment....")
 
                 bot: Optional[BotCore] = None
                 player: Optional[LavalinkPlayer] = None
@@ -5335,8 +5335,8 @@ class Music(commands.Cog):
 
                         if p.locked:
                             raise GenericError(
-                                "**Não é possível executar essa ação com o processamento da música em andamento "
-                                "(por favor aguarde mais alguns segundos e tente novamente).**")
+                                "**This action cannot be performed while music is being processed. "
+                                "(Please wait a few more seconds and try again.).**")
 
                         player = p
                         bot = b
@@ -5345,10 +5345,10 @@ class Music(commands.Cog):
                         break
 
                 if not channel:
-                    raise GenericError("Não há bots disponíveis no momento.")
+                    raise GenericError("Theres no bots are available at this time..")
 
                 if not author.voice:
-                    raise GenericError("Você deve entrar em um canal de voz pra usar esse botão....")
+                    raise GenericError("You must join a voice channel to use this button.....")
 
                 try:
                     node = player.node
