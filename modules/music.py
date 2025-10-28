@@ -4531,7 +4531,7 @@ class Music(commands.Cog):
         return list(set([track.playlist_name for track in player.queue if track.playlist_name and
                          query.lower() in track.playlist_name.lower()]))[:20]
 
-    @rotate.autocomplete("nome")
+    @rotate.autocomplete("name")
     @move.autocomplete("nome")
     @skip.autocomplete("nome")
     @skipto.autocomplete("name")
