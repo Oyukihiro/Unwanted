@@ -120,7 +120,7 @@ class Music(commands.Cog):
         await self.set_voice_status.callback(self=self, inter=ctx, template=template)
 
     @commands.slash_command(
-        description=f"{desc_prefix}Enable/edit the channel's automatic announcement/status system with the song name.",
+        description=f"{desc_prefix}Enable or edit automatic channel announcements with the song name.",
         extras={"only_voiced": True, "exclusive_cooldown": True}, cooldown=stage_cd, max_concurrency=stage_mc,
         default_member_permissions=disnake.Permissions(manage_guild=True)
     )
