@@ -371,7 +371,7 @@ class MusicSettings(commands.Cog):
                                   purge_messages=args.reset)
 
     @commands.slash_command(
-        description=f"{desc_prefix}Create/choose a dedicated channel for requesting songs and leave the player pinned.",
+        description=f"{desc_prefix}Create/choose a channel for song requests and pin the player.",
         default_member_permissions=disnake.Permissions(manage_guild=True), cooldown=setup_cd, max_concurrency=setup_mc
     )
     @commands.contexts(guild=True)
