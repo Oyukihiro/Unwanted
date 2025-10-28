@@ -71,8 +71,8 @@ def replaces(
             replace('{player.loop.mode}', 'Disabled' if not player.loop else 'Current song' if player.loop == "current" else "Queue"). \
             replace('{player.queue.size}', str(len(player.queue or player.queue_autoplay))). \
             replace('{player.volume}', str(player.volume)). \
-            replace('{player.autoplay}', "Ativado" if player.autoplay else "Desativado"). \
-            replace('{player.nightcore}', "Ativado" if player.nightcore else "Desativado"). \
+            replace('{player.autoplay}', "Enabled" if player.autoplay else "Disabled"). \
+            replace('{player.nightcore}', "Enabled" if player.nightcore else "Disabled"). \
             replace('{player.hint}', player.current_hint). \
             replace('{player.log.text}', player.command_log or "Sem registro."). \
             replace('{player.log.emoji}', player.command_log_emoji or ""). \
@@ -84,7 +84,7 @@ def replaces(
             replace('{guild.icon}', guild.icon.with_static_format("png").url if guild.icon else ""). \
             replace('{guild.name}', guild.name). \
             replace('{guild.id}', str(guild.id)). \
-            replace('{queue_format}', queue_text or "Fila vazia...")
+            replace('{queue_format}', queue_text or "Empty queue...")
 
     else:
 
@@ -110,8 +110,8 @@ def replaces(
             replace('{player.loop.mode}', "Current Song"). \
             replace('{player.queue.size}', f"{queue_max_entries}"). \
             replace('{player.volume}', "100"). \
-            replace('{player.autoplay}', "Ativado"). \
-            replace('{player.nightcore}', "Ativado"). \
+            replace('{player.autoplay}', "Enabled"). \
+            replace('{player.nightcore}', "Enabled"). \
             replace('{player.log.emoji}', "⏭️"). \
             replace('{player.log.text}', f"{ctx.author} skipped the song."). \
             replace('{requester.global_name}', ctx.author.global_name). \

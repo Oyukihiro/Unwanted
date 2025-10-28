@@ -155,7 +155,7 @@ def parse_error(
         error_txt = "Esse comando não pode ser executado em mensagens privadas."
 
     elif isinstance(error, MissingSessionID):
-        error_txt = f"**O servidor de música {error.node.identifier} está desconectado, por favor aguarde alguns segundos e tente novamente.**"
+        error_txt = f"**The music server {error.node.identifier} is disconnected, please wait a few seconds and try again.**"
 
     elif isinstance(error, commands.CommandOnCooldown):
         remaing = int(error.retry_after)
@@ -201,7 +201,7 @@ def parse_error(
         error_txt = "**Não houve resultados para sua busca...**"
 
     elif isinstance(error, YoutubeSourceDisabled):
-        error_txt = "O suporte a links/buscas do youtube está desativado devido a medidas reforçadas do próprio youtube " \
+        error_txt = "YouTube links/search support is disabled due to reinforced measures from YouTube itself " \
                      "que impede o funcionamento nativo de links do yt. Caso queira conferir a postagem do youtube sobre isso você pode [clicar aqui](<https://support.google.com/youtube/thread/269521462/enforcement-on-third-party-apps?hl=en>)."
 
     if isinstance(error, ServerSelectionTimeoutError) and os.environ.get("REPL_SLUG"):
@@ -215,7 +215,7 @@ def parse_error(
         elif "No supported audio format" in wave_error:
             error_txt = "**Não há suporte para o link informado.**"
         elif "This video is not available" in wave_error:
-            error_txt = "**Este vídeo está indisponível ou privado...**"
+            error_txt = "**This video is unavailable or private...**"
         elif "This playlist type is unviewable" in wave_error:
             error_txt = "**Oo link da playlist contém um parâmetro/id não suportado...**"
         elif "The playlist does not exist" in wave_error:

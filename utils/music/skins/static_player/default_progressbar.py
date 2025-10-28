@@ -83,7 +83,7 @@ class DefaultProgressbarStaticSkin:
             txt += f"\n> -# 👍 **⠂Adicionado via:** {mode}"
 
         try:
-            vc_txt = f"\n> -# *️⃣ **⠂Canal de voz:** {player.guild.me.voice.channel.mention}"
+            vc_txt = f"\n> -# *️⃣ **⠂Voice channel:** {player.guild.me.voice.channel.mention}"
         except AttributeError:
             pass
 
@@ -93,10 +93,10 @@ class DefaultProgressbarStaticSkin:
         if player.loop:
             if player.loop == 'current':
                 e = '🔂'
-                m = 'Música atual'
+                m = 'Current song'
             else:
                 e = '🔁'
-                m = 'Fila'
+                m = 'Queue'
             txt += f"\n> -# {e} **⠂Modo de repetição:** `{m}`"
 
         if player.current.album_name:
@@ -152,12 +152,12 @@ class DefaultProgressbarStaticSkin:
                                  f"`└ ⏲️` {duration}" + (f" - `Repetições: {t.track_loops}`" if t.track_loops else "") + \
                                  f" **|** `✋` <@{t.requester}>\n"
 
-            embed_queue = disnake.Embed(title=f"Músicas na fila: {qlenght}",
+            embed_queue = disnake.Embed(title=f"Songs in queue: {qlenght}",
                                         color=player.bot.get_color(player.guild.me),
                                         description=f"\n{queue_txt}")
 
             if not has_stream and not player.loop and not player.keep_connected and not player.paused and not player.current.is_stream:
-                embed_queue.description += f"\n`[ ⌛ As músicas acabam` <t:{int((current_time + datetime.timedelta(milliseconds=queue_duration + player.current.duration)).timestamp())}:R> `⌛ ]`"
+                embed_queue.description += f"\n`[ ⌛ Queue ends` <t:{int((current_time + datetime.timedelta(milliseconds=queue_duration + player.current.duration)).timestamp())}:R> `⌛ ]`"
 
             embed_queue.set_image(url=queue_img)
 
@@ -198,7 +198,7 @@ class DefaultProgressbarStaticSkin:
                            f"-# `└ ⏲️` {duration}" + (f" - `Repetições: {t.track_loops}`" if t.track_loops else "") + \
                            f" **|** `👍⠂Recomendada`\n"
 
-            embed_queue = disnake.Embed(title="Próximas músicas recomendadas:", color=player.bot.get_color(player.guild.me),
+            embed_queue = disnake.Embed(title="Next recommended songs:", color=player.bot.get_color(player.guild.me),
                                         description=f"\n{queue_txt}")
 
             embed_queue.set_image(url=queue_img)
@@ -220,14 +220,14 @@ class DefaultProgressbarStaticSkin:
                 min_values=0, max_values=1, required = False,
                 options=[
                     disnake.SelectOption(
-                        label="Adicionar música", emoji="<:add_music:588172015760965654>",
+                        label="Add song", emoji="<:add_music:588172015760965654>",
                         value=PlayerControls.add_song,
-                        description="Adicionar uma música/playlist na fila."
+                        description="Add a song/playlist to the queue."
                     ),
                     disnake.SelectOption(
-                        label="Adicionar nos seus favoritos", emoji="💗",
+                        label="Add to favorites", emoji="💗",
                         value=PlayerControls.add_favorite,
-                        description="Adicionar a música atual nos seus favoritos."
+                        description="Add the current song to your favorites."
                     ),
                     disnake.SelectOption(
                         label="Tocar do inicio", emoji="⏪",

@@ -257,7 +257,7 @@ class BotPool:
 
                 print(
                     "Aplicação com ratelimit do discord!\n"
-                    "Finalizando/Reiniciando o processo em 5 segundos..."
+                    "Ending/Restarting the process in 5 seconds..."
                 )
 
                 self.killing_state = True
@@ -684,7 +684,7 @@ class BotPool:
                 playlist_extra_page_limit=self.config['SPOTIFY_PLAYLIST_EXTRA_PAGE_LIMIT']
             )
         except Exception as e:
-            print(f"⚠️ - Suporte interno ao spotify desativado: {repr(e)}")
+            print(f"⚠️ - Internal Spotify support disabled: {repr(e)}")
             spotify_client = None
 
         self.spotify = spotify_client
@@ -754,7 +754,7 @@ class BotPool:
                 async def check_commands(ctx: CustomContext):
 
                     if not (await bot.is_owner(ctx.author)):
-                        raise GenericError("**Os comandos de texto estão desativados!\n"
+                        raise GenericError("**Text commands are disabled!\n"
                                            "Use os comandos de barra /**", self_delete=True, delete_original=15)
 
                     return True
@@ -813,7 +813,7 @@ class BotPool:
                         return True
 
                     raise GenericError("Esse comando não pode ser executado em mensagens privadas.\n"
-                                     "Use em algum servidor onde há bot compatível adicionado.")
+                                     "Use it in a server where there is a compatible bot added.")
 
                 if not allow_private and not isinstance(inter.guild, disnake.Guild):
 
@@ -935,7 +935,7 @@ class BotPool:
             message = "O token do bot não foi configurado devidamente!"
 
             if os.environ.get("REPL_SLUG"):
-                message += f"Confira se o token foi adicionado nas secrets da replit"
+                message += f"Check if the token was added to the replit secrets"
 
                 print(message + ": Guia de como configurar: https://gist.github.com/zRitsu/70737984cbe163f890dae05a80a3ddbe#2---com-o-projeto-j%C3%A1-criado-prossiga-as-etapas-abaixo")
 
@@ -1360,7 +1360,7 @@ class BotCore(commands.AutoShardedBot):
 
             warn_msg = f"Atenção: O bot [{self.user}] (ID: {self.user.id}) foi configurado no portal do desenvolvedor " \
                   "como bot público\n" \
-                  "lembrando que se caso o bot seja divulgado pra ser adicionado publicamente o mesmo terá que " \
+                  "remember that if the bot is shared to be added publicly it will have to " \
                   "estar sob as condições da licença GPL-2: " \
                   "https://github.com/zRitsu/MuseHeart-MusicBot/blob/main/LICENSE\n" \
                   "Caso não queira seguir as condições da licença no seu bot, você pode deixar o bot privado desmarcando a " \
@@ -1392,7 +1392,7 @@ class BotCore(commands.AutoShardedBot):
     async def on_application_command(self, inter: disnake.ApplicationCommandInteraction):
 
         if not self.bot_ready or self.is_closed():
-            await inter.send("Ainda estou inicializando...\nPor favor aguarde mais um pouco...", ephemeral=True)
+            await inter.send("Still initializing...\nPlease wait a moment...", ephemeral=True)
             return
 
         await super().on_application_command(inter)
@@ -1425,13 +1425,13 @@ class BotCore(commands.AutoShardedBot):
                         self.unload_extension(module_filename)
                         self.load_extension(module_filename)
                         if not self.bot_ready and load_modules_log:
-                            print(f"🟦 - {bot_name} - {filename}.py Recarregado.")
+                            print(f"🟦 - {bot_name} - {filename}.py Reloaded.")
                         load_status["reloaded"].append(f"{filename}.py")
                     except (commands.ExtensionAlreadyLoaded, commands.ExtensionNotLoaded):
                         try:
                             self.load_extension(module_filename)
                             if not self.bot_ready and load_modules_log:
-                                print(f"🟩 - {bot_name} - {filename}.py Carregado.")
+                                print(f"🟩 - {bot_name} - {filename}.py Loaded.")
                             load_status["loaded"].append(f"{filename}.py")
                         except Exception as e:
                             print(f"❌- {bot_name} - Falha ao carregar/recarregar o módulo: {filename}")

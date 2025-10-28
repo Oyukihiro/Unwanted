@@ -542,7 +542,7 @@ class SelectInteraction(disnake.ui.View):
 
         self.clear_items()
 
-        select_menu = disnake.ui.Select(placeholder='Selecione uma opção:', options=self.item_pages[self.current_page])
+        select_menu = disnake.ui.Select(placeholder='Select an option:', options=self.item_pages[self.current_page])
         select_menu.callback = self.callback
         self.add_item(select_menu)
         self.selected = self.item_pages[self.current_page][0].value

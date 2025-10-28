@@ -526,7 +526,7 @@ def check_queue_loading():
 
         if player.locked:
             raise GenericError("**Não é possível executar essa ação com o processamento da música em andamento "
-                               "(por favor aguarde mais alguns segundos e tente novamente).**")
+                               "(please wait a few seconds and try again).**")
 
         return True
 
@@ -707,7 +707,7 @@ async def check_player_perm(inter, bot: BotCore, channel, guild_data: dict = Non
     elif not [m for m in vc.members if not m.bot and (vc.permissions_for(m).move_members or (m.id in player.dj) or m.id == player.player_creator)]:
         player.dj.add(inter.author.id)
         await channel.send(embed=disnake.Embed(
-            description=f"{inter.author.mention} foi adicionado à lista de DJ's por não haver um no canal <#{vc.id}>.",
+            description=f"{inter.author.mention} was added to the DJ's list because there was none in channel <#{vc.id}>.",
             color=player.bot.get_color()), delete_after=10)
 
     return True
@@ -770,7 +770,7 @@ def can_connect(
                 #                   f"Bot:** {b.user.mention}")
 
     if check_other_bots_in_vc and any(m for m in channel.members if m.bot and m.id != guild.me.id):
-        raise GenericError(f"**Há outro bot conectado no canal:** <#{channel.id}>")
+        raise GenericError(f"**There is another bot connected in the channel:** <#{channel.id}>")
 
 async def check_deafen(me: disnake.Member = None):
 

@@ -223,12 +223,12 @@ class Node:
                     if retries >= max_retries:
                         self._is_connecting = False
                         print(
-                            f"❌ - {self._client.bot.user} - Falha ao conectar no servidor [{self.identifier}]." +
+                            f"❌ - {self._client.bot.user} - Failed to connect to server [{self.identifier}]." +
                             (f"\nCausa: {repr(exception)}" if exception else ""))
                         return
                     exception = e
                     if self.identifier != "LOCAL":
-                        print(f'⚠️ - {self._client.bot.user} - Falha ao conectar no servidor [{self.identifier}], '
+                        print(f'⚠️ - {self._client.bot.user} - Failed to connect to server [{self.identifier}], '
                               f'nova tentativa [{retries}/{max_retries}] em {backoff} segundos.')
                     backoff += 2
                     retries += 1

@@ -47,7 +47,7 @@ class ServerManagerView(disnake.ui.View):
         ]
 
         select = disnake.ui.Select(
-            placeholder="Selecione um Bot:",
+            placeholder="Select a Bot:",
             options=opts
         )
 
@@ -65,7 +65,7 @@ class ServerManagerView(disnake.ui.View):
         ]
 
         select = disnake.ui.Select(
-            placeholder="Selecione um Servidor:",
+            placeholder="Select a Server:",
             options=opts,
             custom_id="server_selection"
         )

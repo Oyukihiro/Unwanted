@@ -138,7 +138,7 @@ class Owner(commands.Cog):
 
         await ctx.send(
             embed=disnake.Embed(
-                description="**Reiniciando o servidor lavalink LOCAL.**",
+                description="**Restarting the LOCAL lavalink server.**",
                 color=self.bot.get_color(ctx.guild.me)
             )
         )
@@ -422,7 +422,7 @@ class Owner(commands.Cog):
         if args.pip:
 
             embed = disnake.Embed(
-                description="**Instalando as dependências.\nPor favor aguarde...**",
+                description="**Installing dependencies.\nPlease wait...**",
                 color=self.bot.get_color(ctx.guild.me)
             )
 
@@ -676,7 +676,7 @@ class Owner(commands.Cog):
         await self.bot.update_global_data(ctx.author.id, user_data, db_name=DBModel.users)
 
         embed = disnake.Embed(
-            description=f"**O seu prefixo de usuário foi removido com sucesso.**",
+            description=f"**Your user prefix has been successfully removed.**",
             color=self.bot.get_color(ctx.guild.me)
         )
 
@@ -820,7 +820,7 @@ class Owner(commands.Cog):
 
         except disnake.Forbidden:
             os.remove("./source.zip")
-            raise GenericError("Seu DM está desativado!")
+            raise GenericError("Your DMs are disabled!")
 
         if isinstance(ctx, CustomContext):
             await ctx.send(
@@ -1002,7 +1002,7 @@ class Owner(commands.Cog):
                     return
 
                 if not v.inter.author.voice:
-                    await msg.edit(embed=disnake.Embed(description="### Você não está conectado em um canal de voz...",
+                    await msg.edit(embed=disnake.Embed(description="### You are not connected to a voice channel...",
                                                    color=self.bot.get_color(guild.me)), view=None)
                     return
 

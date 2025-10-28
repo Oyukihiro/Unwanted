@@ -43,7 +43,7 @@ def get_lavalink_servers():
 
     lavalink_nodes = {}
 
-    print(f"Baixando lista de servidores lavalink da fonte: https://lavalink-list.darrennathanael.com/\n"
+    print(f"Downloading lavalink server list from source: https://lavalink-list.darrennathanael.com/\n"
           "Nota: Devido a esses servidores lavalink serem públicos, os mesmos podem apresentar instabilidade.")
 
     for url_type, url in lavalink_urls.items():

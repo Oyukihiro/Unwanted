@@ -561,7 +561,7 @@ class MusicSettings(commands.Cog):
 
             embeds = [
                 disnake.Embed(
-                    description="**Selecione um canal " + ("ou clique em um dos botões abaixo para criar um novo canal para pedir músicas." if guild.me.guild_permissions.manage_channels else "abaixo:") +'**' ,
+                    description="**Select a channel " + ("or click one of the buttons below to create a new channel for requesting music." if guild.me.guild_permissions.manage_channels else "below:") +'**' ,
                     color=color
                 ).set_footer(text="Você tem apenas 45 segundos para selecionar/clicar em uma opção.")
             ]
@@ -569,7 +569,7 @@ class MusicSettings(commands.Cog):
             if not guild.me.guild_permissions.manage_channels:
                 embeds.append(
                     disnake.Embed(
-                        description=f"Os botões de criar canal foram desativados devido o bot **{bot.user.mention}** "
+                        description=f"The channel creation buttons were disabled because the bot **{bot.user.mention}** "
                                     "não possuir a permissão de **gerenciar canais** no servidor.",
                         color=color
                     )
@@ -884,7 +884,7 @@ class MusicSettings(commands.Cog):
                 elif message.thread.archived and message.thread.owner_id == bot.user.id:
                     thread_kw["archived"] = False
                 if thread_kw:
-                    await message.thread.edit(reason=f"Song request reativado por: {inter.author}.", **thread_kw)
+                    await message.thread.edit(reason=f"Song request reactivated by: {inter.author}.", **thread_kw)
         elif player and isinstance(channel, (disnake.VoiceChannel, disnake.StageChannel)) and player.guild.me.voice.channel != channel:
             await player.connect(channel.id)
 
@@ -1087,7 +1087,7 @@ class MusicSettings(commands.Cog):
 
         await bot.update_data(guild.id, guild_data, db_name=DBModel.guilds)
 
-        await inter.send(f"O cargo {role.mention} foi adicionado à lista de DJ's.", ephemeral=True)
+        await inter.send(f"The role {role.mention} has been added to the DJ's list.", ephemeral=True)
 
     @commands.has_guild_permissions(manage_guild=True)
     @commands.command(name="removedjrole", description="Remover um cargo da lista de DJ's do servidor.",
@@ -1131,7 +1131,7 @@ class MusicSettings(commands.Cog):
 
         await bot.update_data(guild.id, guild_data, db_name=DBModel.guilds)
 
-        await inter.send(f"O cargo {role.mention} foi removido da lista de DJ's.", ephemeral=True)
+        await inter.send(f"The role {role.mention} has been removed from the DJ's list.", ephemeral=True)
 
     skin_cd = commands.CooldownMapping.from_cooldown(1, 20, commands.BucketType.guild)
     skin_mc =commands.MaxConcurrency(1, per=commands.BucketType.member, wait=False)
@@ -1285,7 +1285,7 @@ class MusicSettings(commands.Cog):
                     changed_skins_txt += f"Song Request: `{select_view.static_skin_selected.replace('> custom_skin: ', '[custom skin]: ')}`\n"
 
         if global_mode != select_view.global_mode:
-            changed_skins_txt += "Skin Global: `" + ("Ativado" if select_view.global_mode else "Desativado") + "`\n"
+            changed_skins_txt += "Global Skin: `" + ("Enabled" if select_view.global_mode else "Disabled") + "`\n"
 
         if not changed_skins_txt:
             txt = "**Não houve alterações nas configurações de skin...**"
@@ -1461,7 +1461,7 @@ class MusicSettings(commands.Cog):
             break
 
         if not channel:
-            return await inter.edit_original_message("**Não há bots compatíveis adicionado no servidor do invite informado.**")
+            return await inter.edit_original_message("**There are no compatible bots added to the server in the provided invite.**")
 
         global_data = await self.bot.get_global_data(inter.guild_id, db_name=DBModel.guilds)
 
@@ -1480,7 +1480,7 @@ class MusicSettings(commands.Cog):
         await self.bot.update_global_data(inter.guild_id, global_data, db_name=DBModel.guilds)
 
         await inter.edit_original_message(
-            f"**O link {invite} foi ativado/atualizado com sucesso para ser enviado via RPC quando houver "
+            f"**The link {invite} has been successfully enabled/updated to be sent via RPC when there are "
             f"player ativo no canal {inter.author.voice.channel.mention}.**\n"
             f"`Nota: Caso queira exibir no seu status e não tenha o app de RPC, use o comando /rich_presence para "
             f"obter mais informações.`"
@@ -1753,7 +1753,7 @@ class RPCCog(commands.Cog):
 
         if not isinstance(ctx.author.voice.channel, disnake.StageChannel):
             ctx.command.reset_cooldown(ctx)
-            raise GenericError("**Você deve estar conectado em um canal de palco para usar esse comando.**")
+            raise GenericError("**You must be connected to a stage channel to use this command.**")
 
         bot: Optional[BotCore] = None
 
@@ -1778,7 +1778,7 @@ class RPCCog(commands.Cog):
         color = self.bot.get_color(ctx.guild.me)
 
         msg = await ctx.send(
-            embed=disnake.Embed(description="### Selecione uma região abaixo:", color=color),
+            embed=disnake.Embed(description="### Select a region below:", color=color),
             view=view,
         )
 
@@ -1827,7 +1827,7 @@ class RPCCog(commands.Cog):
     async def rich_presence(self, inter: disnake.ApplicationCommandInteraction):
 
         if not self.bot.config["ENABLE_RPC_COMMAND"] and not any([await b.is_owner(inter.author) for b in self.bot.pool.get_guild_bots(inter.guild_id)]):
-            raise GenericError("**Este comando está desativado nas minhas configurações...**\n"
+            raise GenericError("**This command is disabled in my settings...**\n"
                                "Apenas o meu desenvolvedor pode ativar este comando publicamente.")
 
         if not self.bot.config["RPC_PUBLIC_URL"] and not self.bot.config["RPC_SERVER"]:
@@ -1954,8 +1954,8 @@ class RPCCog(commands.Cog):
 
             data["token"] = ""
             await self.bot.update_global_data(id_=user_id, data=data, db_name=DBModel.users)
-            msg = "O token foi removido com sucesso!\n" \
-                  "Agora o sistema de rpc estará desativado no seu usuário."
+            msg = "The token has been successfully removed!\n" \
+                  "Now the RPC system will be disabled for your user."
 
         else: # button_id == "rpc_close"
             await inter.message.delete()

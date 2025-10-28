@@ -164,7 +164,7 @@ class EmbedLinkStaticSkin:
                         disnake.SelectOption(
                             label=("Desativar" if player.restrict_mode else "Ativar") + " o modo restrito", emoji="🔐",
                             value=PlayerControls.restrict_mode,
-                            description="Apenas DJ's/Staff's podem usar comandos restritos."
+                            description="Only DJs/Staff can use restricted commands."
                         ),
                     ]
                 ),

@@ -412,7 +412,7 @@ async def send_idle_embed(
 
     embed = disnake.Embed(description="**Join a voice channel and request a song here " +
                                       ("no post" if is_forum else "no canal ou na conversa abaixo") +
-                                      f" (ou clique no botão abaixo ou use o comando {cmd} aqui ou em algum outro canal)**\n\n"
+                                      f" (or click the button below or use command {cmd} here or in another channel)**\n\n"
                                       "**Você pode usar um nome ou um link de site compatível:**\n"
                                       "[`Youtube`](<https://www.youtube.com/>), [`Soundcloud`](<https://soundcloud.com/>), " \
                                       "[`Spotify`](<https://open.spotify.com/>), [`Twitch`](<https://www.twitch.tv/>)",
@@ -676,11 +676,11 @@ async def select_bot_pool(inter: Union[CustomContext, disnake.MessageInteraction
 
         if (bcount:=len([b for b in inter.bot.pool.get_guild_bots(inter.guild_id) if b.appinfo and b.appinfo.bot_public])):
             raise GenericError(
-                f"**Será necessário adicionar no servidor pelo menos um bot compatível clicando no botão abaixo:**",
+                f"**You'll need to add at least one compatible bot to the server by clicking the button below:**",
                 components=[disnake.ui.Button(custom_id="bot_invite", label=f"Adicionar bot{'s'[:bcount^1]}")]
             )
         else:
-            raise GenericError("**Não há bots compatíveis com meus comandos no servidor...**")
+            raise GenericError("**There are no bots compatible with my commands on the server...**")
 
     if len(bots) == 1 or first:
         return inter, list(bots.values())[0]
@@ -696,7 +696,7 @@ async def select_bot_pool(inter: Union[CustomContext, disnake.MessageInteraction
 
         embed = disnake.Embed(
             color=inter.bot.get_color(),
-            description="**Selecione um bot abaixo:**\n"
+            description="**Select a bot below:**\n"
                         f'Nota: você tem apenas <t:{int((disnake.utils.utcnow() + datetime.timedelta(seconds=45)).timestamp())}:R> para escolher!'
         )
 
@@ -756,7 +756,7 @@ async def select_bot_pool(inter: Union[CustomContext, disnake.MessageInteraction
         try:
             return inter, bots[int(new_inter.data.values[0])]
         except KeyError:
-            raise GenericError("**O bot selecionado foi removido do servidor antes de sua seleção...**")
+            raise GenericError("**The selected bot was removed from the server before your selection...**")
 
 def queue_track_index(inter: disnake.ApplicationCommandInteraction, bot: BotCore, query: str, match_count: int = 1,
                       case_sensitive: bool = False):

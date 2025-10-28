@@ -808,7 +808,7 @@ class LavalinkPlayer(wavelink.Player):
                         voice_msg = None
 
                     if not voice_msg:
-                        self.set_command_log(text=f"O plater foi finalizado por perca de conexão no canal <#{vc.id}>.",
+                        self.set_command_log(text=f"The player was ended due to lost connection in channel <#{vc.id}>.",
                                              emoji="⚠️", controller=True)
                         await self.destroy()
                         return
@@ -850,7 +850,7 @@ class LavalinkPlayer(wavelink.Player):
                     self.update = True
                 else:
                     await self.destroy(force=True)
-                    print(f"Bot: {self.bot.user} | Desconectado do canal de voz: {self.guild_id}")
+                    print(f"Bot: {self.bot.user} | Disconnected from voice channel: {self.guild_id}")
                 return
 
             if event.code == 4014 and self.guild.me.voice:
@@ -1285,7 +1285,7 @@ class LavalinkPlayer(wavelink.Player):
                          "de gerenciar servidor podem usar esse recurso).")
 
         elif self.bot.intents.message_content and self.controller_mode:
-            hints.append("Ao criar uma conversa/thread na mensagem do player, será ativado o modo de song-request "
+            hints.append("When creating a conversation/thread in the player message, song-request mode will be enabled "
                          "nela (possibilitando pedir música apenas enviando o nome/link da música na conversa).")
 
         if len(self.bot.pool.get_guild_bots(self.guild.id)) > 1:
@@ -1371,7 +1371,7 @@ class LavalinkPlayer(wavelink.Player):
                 self.auto_pause = False
 
                 try:
-                    self.set_command_log(emoji="🔋", text="O modo **[economia de recursos]** foi desativado.", controller=True)
+                    self.set_command_log(emoji="🔋", text="The **[resource saver]** mode has been disabled.", controller=True)
                     if self.current:
                         self.queue.insert(0, self.current)
                     await self.process_next(start_position=self.position)
@@ -2119,7 +2119,7 @@ class LavalinkPlayer(wavelink.Player):
                 self.bot.loop.create_task(self.node.on_event(TrackStart({"track": track, "player": self,"node": self.node})))
                 self.set_command_log(
                     emoji="🪫",
-                    text="O player está no modo **[economia de recursos]** (esse modo será desativado automaticamente quando "
+                    text="The player is in **[resource saver]** mode (this mode will be automatically disabled when "
                          f"um membro entrar no canal <#{self.channel_id}>).", controller=True
                 )
             else:
@@ -2482,7 +2482,7 @@ class LavalinkPlayer(wavelink.Player):
             except Exception as e:
                 if isinstance(e, disnake.Forbidden):
                     self.stage_title_event = False
-                    self.set_command_log(emoji="❌", text="O status automático foi desativado devido a falta de permissão pra alterar status.", controller=True)
+                    self.set_command_log(emoji="❌", text="Automatic status has been disabled due to lack of permission to change status.", controller=True)
                     self.update = True
                 print(traceback.format_exc())
 
@@ -3394,7 +3394,7 @@ class LavalinkPlayer(wavelink.Player):
                         can_connect(self.last_channel, self.guild, bot=self.bot)
                     except Exception as e:
                         print(traceback.format_exc())
-                        self.set_command_log(f"O player foi finalizado devido ao erro: {e}", controller=True)
+                        self.set_command_log(f"The player was ended due to error: {e}", controller=True)
                         await self.destroy()
                         return
                     await self.connect(self.last_channel.id)
@@ -3416,7 +3416,7 @@ class LavalinkPlayer(wavelink.Player):
                         if original_identifier != node.identifier:
                             txt = f"O player foi movido para o servidor de música **{node.identifier}**."
                         else:
-                            txt = f"O player foi reconectado no servidor de músca **{self.node.identifier}**"
+                            txt = f"The player was reconnected to music server **{self.node.identifier}**"
                         self.set_command_log(emoji="📶", text=txt, controller=True)
                         self.update = True
                 except:
