@@ -1,4 +1,4 @@
-# Unwatched Music Bot
+# Unwanted Music Bot
 ## Music bot programmed in Python with interactive player, slash commands, integration with [last.fm](https://www.last.fm/), and much more.
 
 - Slash commands
