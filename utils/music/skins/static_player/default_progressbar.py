@@ -232,7 +232,7 @@ class DefaultProgressbarStaticSkin:
                     disnake.SelectOption(
                         label="Tocar do inicio", emoji="⏪",
                         value=PlayerControls.seek_to_start,
-                        description="Voltar o tempo da música atual para o inicio."
+                        description="Restart the current track from the beginning."
                     ),
                     disnake.SelectOption(
                         label=f"Volume: {player.volume}%", emoji="🔊",
@@ -262,7 +262,7 @@ class DefaultProgressbarStaticSkin:
                     disnake.SelectOption(
                         label=("Desativar" if player.autoplay else "Ativar") + " a reprodução automática", emoji="🔄",
                         value=PlayerControls.autoplay,
-                        description="Sistema de adição de música automática quando a fila estiver vazia."
+                        description="Automatic music addition system when the queue is empty."
                     ),
                     disnake.SelectOption(
                         label="Last.fm scrobble", emoji="<:Lastfm:1278883704097341541>",
@@ -272,7 +272,7 @@ class DefaultProgressbarStaticSkin:
                     disnake.SelectOption(
                         label=("Desativar" if player.restrict_mode else "Ativar") + " o modo restrito", emoji="🔐",
                         value=PlayerControls.restrict_mode,
-                        description="Apenas DJ's/Staff's podem usar comandos restritos."
+                        description="Only DJs/Staff can use restricted commands."
                     ),
                 ]
             ),
@@ -299,7 +299,7 @@ class DefaultProgressbarStaticSkin:
                 disnake.SelectOption(
                     label= "Visualizar letras", emoji="📃",
                     value=PlayerControls.lyrics,
-                    description="Obter letra da música atual."
+                    description="Get lyrics for the current track."
                 )
             )
 
@@ -309,7 +309,7 @@ class DefaultProgressbarStaticSkin:
                 disnake.SelectOption(
                     label="Status automático", emoji="📢",
                     value=PlayerControls.set_voice_status,
-                    description="Configurar o status automático do canal de voz."
+                    description="Configure automatic voice channel status."
                 )
             )
 

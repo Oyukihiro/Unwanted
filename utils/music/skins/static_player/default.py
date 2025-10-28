@@ -77,7 +77,7 @@ class DefaultStaticSkin:
             txt += f"\n> -# 👍 **⠂Adicionado via:** {mode}"
 
         try:
-            vc_txt = f"\n> -# *️⃣ **⠂Canal de voz:** {player.guild.me.voice.channel.mention}"
+            vc_txt = f"\n> -# *️⃣ **⠂Voice Channel:** {player.guild.me.voice.channel.mention}"
         except AttributeError:
             pass
 
@@ -86,7 +86,7 @@ class DefaultStaticSkin:
 
         if player.loop:
             if player.loop == 'current':
-                e = '🔂'; m = 'Música atual'
+                e = '🔂'; m = 'Current track'
             else:
                 e = '🔁'; m = 'Fila'
             txt += f"\n> -# {e} **⠂Modo de repetição:** `{m}`"
@@ -217,12 +217,12 @@ class DefaultStaticSkin:
                     disnake.SelectOption(
                         label="Adicionar nos seus favoritos", emoji="💗",
                         value=PlayerControls.add_favorite,
-                        description="Adicionar a música atual nos seus favoritos."
+                        description="Add the current track to your favorites."
                     ),
                     disnake.SelectOption(
                         label="Tocar do inicio", emoji="⏪",
                         value=PlayerControls.seek_to_start,
-                        description="Voltar o tempo da música atual para o inicio."
+                        description="Restart the current track from the beginning."
                     ),
                     disnake.SelectOption(
                         label=f"Volume: {player.volume}%", emoji="🔊",
@@ -289,7 +289,7 @@ class DefaultStaticSkin:
                 disnake.SelectOption(
                     label= "Visualizar letras", emoji="📃",
                     value=PlayerControls.lyrics,
-                    description="Obter letra da música atual."
+                    description="Get lyrics for the current track."
                 )
             )
 

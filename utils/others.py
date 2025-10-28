@@ -697,7 +697,7 @@ async def select_bot_pool(inter: Union[CustomContext, disnake.MessageInteraction
         embed = disnake.Embed(
             color=inter.bot.get_color(),
             description="**Select a bot below:**\n"
-                        f'Nota: você tem apenas <t:{int((disnake.utils.utcnow() + datetime.timedelta(seconds=45)).timestamp())}:R> para escolher!'
+                        f'Note: You only have <t:{int((disnake.utils.utcnow() + datetime.timedelta(seconds=45)).timestamp())}:R> to choose!'
         )
 
         components = [

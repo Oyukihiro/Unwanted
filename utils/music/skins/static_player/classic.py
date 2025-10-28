@@ -121,12 +121,12 @@ class ClassicStaticSkin:
                     disnake.SelectOption(
                         label="Adicionar nos seus favoritos", emoji="💗",
                         value=PlayerControls.add_favorite,
-                        description="Adicionar a música atual nos seus favoritos."
+                        description="Add the current track to your favorites."
                     ),
                     disnake.SelectOption(
                         label="Tocar do inicio", emoji="⏪",
                         value=PlayerControls.seek_to_start,
-                        description="Voltar o tempo da música atual para o inicio."
+                        description="Restart the current track from the beginning."
                     ),
                     disnake.SelectOption(
                         label=f"Volume: {player.volume}%", emoji="🔊",
@@ -193,7 +193,7 @@ class ClassicStaticSkin:
                 disnake.SelectOption(
                     label= "Visualizar letras", emoji="📃",
                     value=PlayerControls.lyrics,
-                    description="Obter letra da música atual."
+                    description="Get lyrics for the current track."
                 )
             )
 

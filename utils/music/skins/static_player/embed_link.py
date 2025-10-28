@@ -58,7 +58,7 @@ class EmbedLinkStaticSkin:
             txt += f"\n> -# 👍 **⠂Adicionado via:** {mode}\n"
 
         try:
-            vc_txt += f"> -# *️⃣ **⠂Canal de voz:** {player.guild.me.voice.channel.mention}\n"
+            vc_txt += f"> -# *️⃣ **⠂Voice Channel:** {player.guild.me.voice.channel.mention}\n"
         except AttributeError:
             pass
 
@@ -70,7 +70,7 @@ class EmbedLinkStaticSkin:
 
         elif player.loop:
             if player.loop == 'current':
-                txt += '> -# 🔂 **⠂Repetição:** `música atual`\n'
+                txt += '> -# 🔂 **⠂Repeat:** `current track`\n'
             else:
                 txt += '> -# 🔁 **⠂Repetição:** `fila`\n'
 
@@ -82,7 +82,7 @@ class EmbedLinkStaticSkin:
 
         if qsize := len(player.queue):
 
-            qtext = "> -# **Músicas na lista"
+            qtext = "> -# **Tracks in queue"
 
             if qsize  > 4:
                 qtext += f" [{qsize}]:"
@@ -124,7 +124,7 @@ class EmbedLinkStaticSkin:
                         disnake.SelectOption(
                             label="Tocar do inicio", emoji="⏪",
                             value=PlayerControls.seek_to_start,
-                            description="Voltar o tempo da música atual para o inicio."
+                            description="Restart the current track from the beginning."
                         ),
                         disnake.SelectOption(
                             label=f"Volume: {player.volume}%", emoji="🔊",
@@ -154,7 +154,7 @@ class EmbedLinkStaticSkin:
                         disnake.SelectOption(
                             label=("Desativar" if player.autoplay else "Ativar") + " a reprodução automática", emoji="🔄",
                             value=PlayerControls.autoplay,
-                            description="Sistema de adição de música automática quando a fila estiver vazia."
+                            description="Automatic music addition system when the queue is empty."
                         ),
                         disnake.SelectOption(
                             label="Last.fm scrobble", emoji="<:Lastfm:1278883704097341541>",
@@ -192,7 +192,7 @@ class EmbedLinkStaticSkin:
                 disnake.SelectOption(
                     label= "Visualizar letras", emoji="📃",
                     value=PlayerControls.lyrics,
-                    description="Obter letra da música atual."
+                    description="Get lyrics for the current track."
                 )
             )
 

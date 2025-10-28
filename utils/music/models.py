@@ -592,7 +592,7 @@ class LavalinkPlayer(wavelink.Player):
             f"É possível alterar a skin/aparência do player usando o comando /change_skin ou {self.prefix_info}skin "
             f"(Apenas membros com permissão de gerenciar servidor podem usar esse comando).",
 
-            "Dê uma nova cara para o player de música no servidor criando skins personalizadas. Experimente usando "
+            "Give a new look to the music player in the server by creating custom skins. Try using "
             f"o comando /custom_skin ou {self.prefix_info}customskin (Apenas membros com permissão de administrador "
             "podem usar esse comando).",
 
@@ -616,7 +616,7 @@ class LavalinkPlayer(wavelink.Player):
         if self.bot.config["LASTFM_KEY"] and self.bot.config["LASTFM_SECRET"]:
             self.initial_hints.append(
                 f"Você pode vincular uma conta do last.fm para registrar as músicas que você ouvir por aqui na sua "
-                f"lista de músicas tocadas. Experimente usando o comando /lastfm ou {self.prefix_info}lastfm."
+                f"played tracks list. Try using the command /lastfm or {self.prefix_info}lastfm."
             )
 
         if hint_platforms:
@@ -646,7 +646,7 @@ class LavalinkPlayer(wavelink.Player):
         self.bot.dispatch("player_create", player=self)
 
     def __str__(self) -> str:
-        return f"Servidor de música atual: {self.node.identifier} (v{self.node.version})"
+        return f"Current music server: {self.node.identifier} (v{self.node.version})"
 
     def __repr__(self):
         return f"<volume={self.volume} " \
@@ -1130,7 +1130,7 @@ class LavalinkPlayer(wavelink.Player):
                             continue
 
                         if not getattr(self, "yt_warn", None):
-                            txt = f"Devido a restrições do youtube no servidor `{self.node.identifier}`. Durante a sessão atual " \
+                            txt = f"Due to YouTube restrictions on the server `{self.node.identifier}`. During the current session " \
                                   "será feito uma tentativa de obter a mesma música em outras plataformas de música usando o nome " \
                                   "das músicas do youtube que estão na fila (talvez a música tocada seja diferente do esperado " \
                                   "ou até mesmo ignoradas caso não retorne resultados)."
@@ -1312,16 +1312,16 @@ class LavalinkPlayer(wavelink.Player):
             if bots_in_guild:
                 hints.append(
                     "Caso algum membro queira me usar em outro canal de voz sem precisar aguardar me "
-                    f"desconectarem ou me interromperem do canal atual, há mais {bots_in_guild} bot{'s'[:bots_in_guild^1]} no servidor que "
+                    f"disconnect or interrupt me from the current channel, there are {bots_in_guild} more bot{'s'[:bots_in_guild^1]} in the server that "
                     f"funciona{'m'[:bots_in_guild^1]} com o meu sistema/comandos (usando o mesmo prefixo/comandos de barra). "
-                    f"Experimente entrar em um canal de voz diferente do meu atual e use o comando "
+                    f"Try joining a different voice channel than my current one and use the command "
                     f"{self.prefix_info}play ou /play."
                 )
 
             elif bots_outside_guild:
                 hints.append(
                     "Caso algum membro queira me usar em outro canal de voz sem precisar aguardar me "
-                    f"desconectarem ou me interromperem do canal atual. Dá para adicionar mais {bots_outside_guild} bot{'s'[:bots_outside_guild^1]} "
+                    f"disconnect or interrupt me from the current channel. You can add {bots_outside_guild} more bot{'s'[:bots_outside_guild^1]} "
                     f"extras no servidor atual que funciona(m) com o mesmo sistema/comandos (usando o mesmo "
                     f"prefixo/comandos de barra). Use o comando {self.prefix_info}invite ou /invite para adicioná-los."
                 )
