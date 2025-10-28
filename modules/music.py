@@ -128,7 +128,7 @@ class Music(commands.Cog):
     async def set_voice_status(
             self, inter: disnake.ApplicationCommandInteraction,
             template: str = commands.Param(
-                name="modelo", default="",
+                name="model", default="",
                 description="Manually specify a status template (include placeholders)."
             )
     ):
