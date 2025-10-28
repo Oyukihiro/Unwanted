@@ -31,7 +31,7 @@ Hosting on your own PC/VPS (windows/linux)
 
 * Download this source as a [zip](https://github.com/Oyukihiro/Unwanted.git) and extract it (Or use the command below in the terminal/cmd and then open the folder):
 ```shell
-git clone https://github.com/zRitsu/MuseHeart-MusicBot.git
+git clone https://github.com/Oyukihiro/Unwanted.git
 ```
 * Double-click the source_setup.sh file (or just setup if your Windows is not displaying file extensions) and wait.</br>
 `If you are using Linux, use the command in the terminal:`
