@@ -413,13 +413,13 @@ async def send_idle_embed(
     embed = disnake.Embed(description="**Join a voice channel and request a song here " +
                                       ("no post" if is_forum else "no canal ou na conversa abaixo") +
                                       f" (or click the button below or use command {cmd} here or in another channel)**\n\n"
-                                      "**Você pode usar um nome ou um link de site compatível:**\n"
+                                      "** You can use a compatible name or website link.:**\n"
                                       "[`Youtube`](<https://www.youtube.com/>), [`Soundcloud`](<https://soundcloud.com/>), " \
                                       "[`Spotify`](<https://open.spotify.com/>), [`Twitch`](<https://www.twitch.tv/>)",
                           color=bot.get_color(target.guild.me))
 
     if text:
-        embed.description += f"\n\n**ÚLTIMA AÇÃO:** {text.replace('**', '')}\n"
+        embed.description += f"\n\n**LAST ACTION:** {text.replace('**', '')}\n"
 
     embed.set_thumbnail(target.guild.me.display_avatar.replace(size=256).url)
 
@@ -677,7 +677,7 @@ async def select_bot_pool(inter: Union[CustomContext, disnake.MessageInteraction
         if (bcount:=len([b for b in inter.bot.pool.get_guild_bots(inter.guild_id) if b.appinfo and b.appinfo.bot_public])):
             raise GenericError(
                 f"**You'll need to add at least one compatible bot to the server by clicking the button below:**",
-                components=[disnake.ui.Button(custom_id="bot_invite", label=f"Adicionar bot{'s'[:bcount^1]}")]
+                components=[disnake.ui.Button(custom_id="bot_invite", label=f"Add bot{'s'[:bcount^1]}")]
             )
         else:
             raise GenericError("**There are no bots compatible with my commands on the server...**")
