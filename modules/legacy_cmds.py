@@ -383,9 +383,9 @@ class Owner(commands.Cog):
 
         self.bot.pool.commit = commit.split("...")[-1]
 
-        text = "`Será necessário me reiniciar após as alterações.`"
+        text = "`Will I need to restart after making changes.`"
 
-        txt = f"`✅` **[Atualização realizada com sucesso!]({self.bot.pool.remote_git_url}/commits/main)**"
+        txt = f"`✅` **[Update successfully completed!]({self.bot.pool.remote_git_url}/commits/main)**"
 
         if git_log:
             txt += f"\n\n{self.format_log(git_log[:10])}"
@@ -456,7 +456,7 @@ class Owner(commands.Cog):
 
                 await ctx.send(
                     embed=disnake.Embed(
-                        description="**Será necessário atualizar as dependências usando o comando "
+                        description="**You will need to update the dependencies using the command "
                                     "abaixo no terminal/shell:**\n"
                                     f"```sh\n{txt}{cmd}```\nou usar usar o comando: "
                                     f"```ansi\n[34;1m{prefix}update --force --pip[0m``` \n"
@@ -551,7 +551,7 @@ class Owner(commands.Cog):
 
         git_log += format_git_log(data)
 
-        txt = f"🔰 ** | [Atualizações recentes:]({self.bot.pool.remote_git_url}/commits/main)**\n\n" + self.format_log(
+        txt = f"🔰 ** | [Recent updates:]({self.bot.pool.remote_git_url}/commits/main)**\n\n" + self.format_log(
             git_log)
 
         if isinstance(ctx, CustomContext):
@@ -707,7 +707,7 @@ class Owner(commands.Cog):
         else:
             guild_data["prefix"] = prefix
             await self.bot.update_global_data(server_id, guild_data, db_name=DBModel.guilds)
-            embed.description = f"**O prefixo para o servidor com o id informado agora é:** {disnake.utils.escape_markdown(prefix)}"
+            embed.description = f"**The prefix for the server with the specified ID is now:** {disnake.utils.escape_markdown(prefix)}"
 
         self.bot.pool.guild_prefix_cache[ctx.guild.id] = prefix
 
@@ -715,8 +715,8 @@ class Owner(commands.Cog):
 
     @commands.is_owner()
     @panel_command(aliases=["expsource", "export", "exs"],
-                   description="Exportar minha source para um arquivo zip.", emoji="💾",
-                   alt_name="Exportar source/código-fonte.")
+                   description="Export my source to a zip file.", emoji="💾",
+                   alt_name="Export source/source code.")
     async def exportsource(self, ctx:Union[CustomContext, disnake.MessageInteraction], *, flags: str = ""):
 
         if not os.path.isdir(os.environ['GIT_DIR']):
@@ -800,7 +800,7 @@ class Owner(commands.Cog):
                 os.remove("./source.zip")
             except:
                 pass
-            raise GenericError(f"**O tamanho do arquivo ultrapassou do limite de 25MB (tamanho atual: {humanize.naturalsize(filesize)})**")
+            raise GenericError(f"**The file size has exceeded the 25MB limit (current size: {humanize.naturalsize(filesize)})**")
 
         try:
             embed = disnake.Embed(
@@ -808,7 +808,7 @@ class Owner(commands.Cog):
                             "prints of the .env file content and do not add this file in public places like "
                             "github, repl.it, glitch.com, etc.**",
                 color=self.bot.get_color(ctx.guild.me))
-            embed.set_footer(text="Por medida de segurança, esta mensagem será deletada em 2 minutos.")
+            embed.set_footer(text="As a security measure, this message will be deleted in 2 minutes.")
 
             msg = await ctx.author.send(
                 embed=embed,
@@ -825,12 +825,12 @@ class Owner(commands.Cog):
         if isinstance(ctx, CustomContext):
             await ctx.send(
                 embed=disnake.Embed(
-                    description=f"**O arquivo [source.zip]({msg.jump_url}) foi enviado no seu privado.**",
+                    description=f"**The Archive [source.zip]({msg.jump_url}) It was successfully sent to your DM**",
                     color=self.bot.get_color(ctx.guild.me)
                 )
             )
         else:
-            return f"Arquivo [source.zip]({msg.jump_url}) foi enviado com sucesso no seu DM."
+            return f"Archive [source.zip]({msg.jump_url}) It was successfully sent to your DM.."
 
     def zip_dir(self, filelist: list):
 
@@ -921,8 +921,8 @@ class Owner(commands.Cog):
             except disnake.Forbidden:
                 traceback.print_exc()
                 raise GenericError(
-                    "**Ocorreu um erro (verifique os logs/terminal ou libere seu DM para o próximo "
-                    "resultado ser enviado diretamente no seu DM).**"
+                    "**An error occurred (check the logs/terminal or release your DM for the next one). "
+                    "result to be sent directly to your DM).**"
                 )
 
         else:
@@ -1019,7 +1019,7 @@ class Owner(commands.Cog):
         node: wavelink.Node = bot.music.get_best_node()
 
         if not node:
-            raise GenericError("**Não há servidores de música disponível!**")
+            raise GenericError("**No music servers available!**")
 
         player: LavalinkPlayer = await bot.get_cog("Music").create_player(
             inter=ctx, bot=bot, guild=guild, channel=channel
@@ -1066,15 +1066,15 @@ class Owner(commands.Cog):
         if not url:
 
             if not ctx.message.attachments:
-                raise GenericError("Você deve informar o link de uma imagem ou gif (ou anexar uma) no comando.")
+                raise GenericError("You must provide the link to an image or gif (or attach one) in the command.")
 
             url = ctx.message.attachments[0].url
 
             if not url.split("?ex=")[0].endswith((".png", ".jpg", ".jpeg", ".webp", ".gif", ".bmp")):
-                raise GenericError("Você deve anexar um arquivo válido: png, jpg, jpeg, webp, gif, bmp.")
+                raise GenericError("You must attach a valid file: png, jpg, jpeg, webp, gif, bmp.")
 
         elif not URL_REG.match(url):
-            raise GenericError("Você informou um link inválido.")
+            raise GenericError("You have provided an invalid link..")
 
         inter, bot = await select_bot_pool(ctx, return_new=True)
 
@@ -1090,11 +1090,11 @@ class Owner(commands.Cog):
             await inter.response.defer(ephemeral=True)
             func = inter.edit_original_message
 
-        await func(f"O novo {mode} do bot {bot.user.mention} está sendo processado. Por favor aguarde...", embed=None, view=None)
+        await func(f"The new {mode} bot {bot.user.mention} is being processed. Please wait...", embed=None, view=None)
 
         async with ctx.bot.session.get(url) as r:
             if r.status != 200:
-                raise GenericError(f"Erro {r.status}: {await r.text()}")
+                raise GenericError(f"Error {r.status}: {await r.text()}")
             image_bytes = await r.read()
 
         payload = {mode: await disnake.utils._assetbytes_to_base64_data(image_bytes)}
@@ -1118,7 +1118,7 @@ class Owner(commands.Cog):
 
         avatar_txt = mode if not use_hyperlink else f"[{mode}]({url})"
 
-        await func(f"O {avatar_txt} do bot {bot.user.mention} foi alterado com sucesso.", view=None, embed=None)
+        await func(f"O {avatar_txt} bot {bot.user.mention} has been successfully changed.", view=None, embed=None)
 
     async def cog_check(self, ctx: CustomContext) -> bool:
         return await check_requester_channel(ctx)
