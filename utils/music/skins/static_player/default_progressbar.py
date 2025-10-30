@@ -237,10 +237,10 @@ class DefaultProgressbarStaticSkin:
                     disnake.SelectOption(
                         label=f"Volume: {player.volume}%", emoji="🔊",
                         value=PlayerControls.volume,
-                        description="Ajustar volume."
+                        description="Adjuste volume."
                     ),
                     disnake.SelectOption(
-                        label="Misturar", emoji="🔀",
+                        label="Mix", emoji="🔀",
                         value=PlayerControls.shuffle,
                         description="Misturar as músicas da fila."
                     ),
@@ -297,7 +297,7 @@ class DefaultProgressbarStaticSkin:
         if player.current.ytid and player.node.lyric_support:
             data["components"][5].options.append(
                 disnake.SelectOption(
-                    label= "Visualizar letras", emoji="📃",
+                    label= "View lyrics", emoji="📃",
                     value=PlayerControls.lyrics,
                     description="Get lyrics for the current track."
                 )
@@ -307,7 +307,7 @@ class DefaultProgressbarStaticSkin:
         if isinstance(player.last_channel, disnake.VoiceChannel):
             data["components"][5].options.append(
                 disnake.SelectOption(
-                    label="Status automático", emoji="📢",
+                    label="Automatic status", emoji="📢",
                     value=PlayerControls.set_voice_status,
                     description="Configure automatic voice channel status."
                 )
