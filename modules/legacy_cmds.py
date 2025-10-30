@@ -305,10 +305,10 @@ class Owner(commands.Cog):
 
     @commands.is_owner()
     @commands.max_concurrency(1, commands.BucketType.default)
-    @panel_command(aliases=["up", "update"], description="Update using git.",
-                   emoji="<:git:944873798166020116>", alt_name="Update Bot", extras={"flags": update_flags})
+    @panel_command(aliases=["up", "atualizar"], description="Atualizar meu code usando o git.",
+                   emoji="<:git:944873798166020116>", alt_name="Atualizar Bot", extras={"flags": update_flags})
     async def update(self, ctx: Union[CustomContext, disnake.MessageInteraction], *,
-                     opts: str = ""):  # TODO: Rever se há alguma forma de usar commands.Flag sem um argumento obrigatório, ex: --pip.
+                     opts: str = ""):  # TODO: Rever se há alguma forma de usar commands.Flag sem um argumento obrigatório, ex: --pip
 
         out_git = ""
 
