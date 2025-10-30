@@ -305,8 +305,8 @@ class Owner(commands.Cog):
 
     @commands.is_owner()
     @commands.max_concurrency(1, commands.BucketType.default)
-    @panel_command(aliases=["up", "atualizar"], description="Atualizar meu code usando o git.",
-                   emoji="<:git:944873798166020116>", alt_name="Atualizar Bot", extras={"flags": update_flags})
+    @panel_command(aliases=["up", "update"], description="Update using git.",
+                   emoji="<:git:944873798166020116>", alt_name="Update Bot", extras={"flags": update_flags})
     async def update(self, ctx: Union[CustomContext, disnake.MessageInteraction], *,
                      opts: str = ""):  # TODO: Rever se há alguma forma de usar commands.Flag sem um argumento obrigatório, ex: --pip.
 
@@ -348,7 +348,7 @@ class Owner(commands.Cog):
             try:
                 pull_log = await run_command("git --work-tree=. pull --allow-unrelated-histories -X theirs")
                 if "Already up to date" in pull_log:
-                    raise GenericError("**Já estou com os ultimos updates instalados...**")
+                    raise GenericError("**I already have the latest updates installed....**")
                 out_git += pull_log
 
             except GenericError as e:
@@ -357,7 +357,7 @@ class Owner(commands.Cog):
             except Exception as e:
 
                 if "Already up to date" in str(e):
-                    raise GenericError("Já estou com os ultimos updates instalados...")
+                    raise GenericError("I already have the latest updates installed....")
 
                 elif not "Fast-forward" in str(e):
                     traceback.print_exc()
