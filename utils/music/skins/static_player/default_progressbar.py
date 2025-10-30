@@ -189,14 +189,14 @@ class DefaultProgressbarStaticSkin:
 
                     queue_txt += f"-# `┌ {n+1})` [`{fix_characters(t.title, limit=34)}`]({t.uri})\n" \
                            f"-# `└ ⏲️ {duration}`" + (f" - `Repetições: {t.track_loops}`" if t.track_loops else "") + \
-                           f" **|** `👍⠂Recomendada`\n"
+                           f" **|** `👍⠂Recommended`\n"
 
                 else:
                     duration = f"<t:{int((current_time + datetime.timedelta(milliseconds=queue_duration)).timestamp())}:R>"
 
                     queue_txt += f"-# `┌ {n+1})` [`{fix_characters(t.title, limit=34)}`]({t.uri})\n" \
                            f"-# `└ ⏲️` {duration}" + (f" - `Repetições: {t.track_loops}`" if t.track_loops else "") + \
-                           f" **|** `👍⠂Recomendada`\n"
+                           f" **|** `👍⠂Recommended`\n"
 
             embed_queue = disnake.Embed(title="Next recommended songs:", color=player.bot.get_color(player.guild.me),
                                         description=f"\n{queue_txt}")
