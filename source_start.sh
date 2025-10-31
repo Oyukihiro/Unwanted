@@ -29,7 +29,7 @@ else
   source $VENV_PATH
 fi
 
-echo "Iniciando bot (Verifique se o mesmo está online)..."
+echo "Starting bot (Check if it is online)......"
 
 #mkdir -p ./.logs
 
