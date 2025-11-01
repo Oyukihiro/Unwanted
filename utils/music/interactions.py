@@ -142,11 +142,11 @@ class QueueInteraction(disnake.ui.View):
         stop_interaction.callback = self.stop_interaction
         self.add_item(stop_interaction)
 
-        play = disnake.ui.Button(emoji='▶️', label="Tocar", style=disnake.ButtonStyle.grey, custom_id="queue_skip")
+        play = disnake.ui.Button(emoji='▶️', label="Play", style=disnake.ButtonStyle.grey, custom_id="queue_skip")
         play.callback = self.invoke_command
         self.add_item(play)
 
-        move = disnake.ui.Button(emoji="↪️", label="Mover", style=disnake.ButtonStyle.grey, custom_id="queue_move")
+        move = disnake.ui.Button(emoji="↪️", label="Move", style=disnake.ButtonStyle.grey, custom_id="queue_move")
         move.callback = self.move_callback
         self.add_item(move)
 
