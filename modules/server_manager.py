@@ -99,7 +99,7 @@ class ServerManagerView(disnake.ui.View):
             embed.set_thumbnail(url=self.current_guild.icon.with_static_format("png").url)
 
         if interaction.guild.id == self.current_guild.id and interaction.bot.user.id == self.bot.user.id:
-            embed.description += f"\n```ansi\n[32;1mEstou no servidor atual!```"
+            embed.description += f"\n```ansi\n[32;1m I'm on the current server!```"
 
         embed.set_footer(text=f"{self.bot.user} [ID: {self.bot.user.id}]", icon_url=self.bot.user.display_avatar.url)
 
@@ -116,7 +116,7 @@ class ServerManagerView(disnake.ui.View):
 
         if has_server_select and len(self.pages) > 1:
 
-            back = disnake.ui.Button(label="Voltar", emoji="⬅️")
+            back = disnake.ui.Button(label="Back", emoji="⬅️")
             back.callback = self.previous_page
             self.add_item(back)
 
@@ -128,14 +128,14 @@ class ServerManagerView(disnake.ui.View):
         leave.callback = self.leave_guild
         self.add_item(leave)
 
-        stop = disnake.ui.Button(label="Parar", emoji="⏹️", style=disnake.ButtonStyle.blurple)
+        stop = disnake.ui.Button(label="Stop", emoji="⏹️", style=disnake.ButtonStyle.blurple)
         stop.callback = self.stop_interaction
         self.add_item(stop)
 
     async def interaction_check(self, interaction: disnake.MessageInteraction) -> bool:
 
         if interaction.author.id != self.inter.user.id:
-            await interaction.response.send_message("Você não pode interagir aqui...", ephemeral=True)
+            await interaction.response.send_message("You cannot interact here....", ephemeral=True)
             return False
 
         return True
@@ -162,7 +162,7 @@ class ServerManagerView(disnake.ui.View):
         if interaction.guild.id == self.current_guild.id and interaction.bot.user.id == self.bot.user.id:
             await interaction.response.edit_message(
                 embed=disnake.Embed(
-                    description="**Você me removeu do servidor atual.**",
+                    description="**You removed me from the current server.**",
                     color=self.bot.get_color(interaction.guild.me)
                 ),
                 view=None
@@ -208,7 +208,7 @@ class ServerManagerCog(commands.Cog):
     @commands.max_concurrency(1, commands.BucketType.default)
     @commands.is_owner()
     @commands.command(name="servers", aliases=["servermanager"], hidden=True,
-                      description="Gerenciar servidores em que o bot está.")
+                      description=""Manage servers where the bot is located."")
     async def servermanager(self, ctx: CustomContext):
 
         view = ServerManagerView(ctx)
