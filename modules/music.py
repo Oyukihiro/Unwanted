@@ -5603,7 +5603,7 @@ class Music(commands.Cog):
             if control == PlayerControls.fav_manager:
 
                 if str(interaction.user.id) not in interaction.message.content:
-                    await interaction.send("Você não pode interagir aqui!", ephemeral=True)
+                    await interaction.send("You cannot interact here!", ephemeral=True)
                     return
 
                 cmd = self.bot.get_slash_command("fav_manager")
@@ -5695,7 +5695,7 @@ class Music(commands.Cog):
                 ] + modal_components
 
                 await interaction.response.send_modal(
-                    title="Pedir uma música",
+                    title="Request one song",
                     custom_id="modal_add_song" + (f"_{interaction.message.id}" if interaction.message.thread else ""),
                     components=modal_components
                 )
@@ -5733,7 +5733,7 @@ class Music(commands.Cog):
             try:
                 player: LavalinkPlayer = self.bot.music.players[interaction.guild_id]
             except KeyError:
-                await interaction.send("Não há player ativo no servidor...", ephemeral=True)
+                await interaction.send("Theres no player actived in the server...", ephemeral=True)
                 await send_idle_embed(interaction.message, bot=self.bot)
                 return
 
@@ -5742,7 +5742,7 @@ class Music(commands.Cog):
                     return
 
             if player.interaction_cooldown:
-                raise GenericError("O player está em cooldown, tente novamente em instantes.")
+                raise GenericError("The player is on cooldown, please try again in a few moments.")
 
             try:
                 vc = player.guild.me.voice.channel
