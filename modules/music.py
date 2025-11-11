@@ -5787,7 +5787,7 @@ class Music(commands.Cog):
                     await self.player_interaction_concurrency.acquire(interaction)
                 except commands.MaxConcurrencyReached:
                     raise GenericError(
-                        "**Você tem uma interação em aberto!**\n`Se for uma mensagem oculta, evite clicar em \"ignorar\".`")
+                        "**You have an open interaction!**\n`If it is a hidden message, avoid clicking on \"ignore\".`")
 
             if control == PlayerControls.add_favorite:
 
